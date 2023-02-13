@@ -11,17 +11,27 @@
 <body>
     <!--template basic-navbar template only shows the home button-->
     <div th:replace="basic-navbar :: nav"></div>
-    <h2>Data</h2>
-    <table>
-        <tr>
-            <th>Department ID</th>
-            <th>Department Name</th>
-            <th>Column 3</th>
-        </tr>
-        <tr th:each="data : ${dept}">
-            <td th:text="${data.getId()}"></td>
-            <td th:text="${data.getName()}"></td>
-        </tr>
-    </table>
+<!--    <h2>Data</h2>-->
+<!--    <select>-->
+<!--        <tr>-->
+<!--            <th>Department ID</th>-->
+<!--            <th>Department Name</th>-->
+<!--            <th>Column 3</th>-->
+<!--        </tr>-->
+<!--        <select th:each="data : ${dept}">-->
+<!--&lt;!&ndash;            <td th:text="${data.getId()}"></td>&ndash;&gt;-->
+<!--            <option th:text="${data.getName()}"></option>-->
+<!--        </select>-->
+
+    <select class="form-control" th:field="*{dept}">
+        <option value="" disabled selected>Choose a department</option>
+        <option th:each="data : ${dept}"
+                th:value="${data.getId()}"
+                th:text="${data.getName()}">
+        </option>
+    </select>
+<!--    </select>-->
+
+
 </body>
 </html>
