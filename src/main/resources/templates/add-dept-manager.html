@@ -56,7 +56,14 @@
                       th:text="${data.getName()}">
               </option>
             </select>
+            <select class="form-control" th:field="*{companyCredentials}">
+              <option value="" disabled selected>Choose a Manager</option>
+              <option th:each="data : ${companyCredentials}"
+                      th:value="${data.getEmployeeId()}"
+                      th:text="${data.getEmployeeId()}">
 
+              </option>
+            </select>
             <button type="submit"> Continue</button>
           </form>
         </div>

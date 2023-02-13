@@ -28,7 +28,7 @@ public class NHCompanyCredentialsService {
     }
 
     /*
-   get a list of all employees in nhPersonal table
+   get a list of all credentials in nhCompany table
     */
     public List<NHCompanyCredentials> getAllNHCredentials(){
         return nhCompanyCredentialsRepository.findAll();

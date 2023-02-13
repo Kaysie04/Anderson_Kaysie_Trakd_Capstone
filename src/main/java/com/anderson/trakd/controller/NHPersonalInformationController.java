@@ -2,6 +2,7 @@ package com.anderson.trakd.controller;
 import com.anderson.trakd.model.NHPersonalInformation;
 import com.anderson.trakd.repository.DeptRepository;
 import com.anderson.trakd.repository.ManagerRepository;
+import com.anderson.trakd.repository.NHCompanyCredentialsRepository;
 import com.anderson.trakd.repository.NHPersonalInformationRepository;
 import com.anderson.trakd.service.NHCompanyCredentialsService;
 import com.anderson.trakd.service.NHPersonalInformationService;
@@ -19,17 +20,20 @@ public class NHPersonalInformationController {
     private final NHCompanyCredentialsService nhCompanyCredentialsService;
     private final DeptRepository deptRepository;
     private final ManagerRepository managerRepository;
+
+    private final NHCompanyCredentialsRepository nhCompanyCredentialsRepository;
     @Autowired
     private NHPersonalInformationRepository nhPersonalInformationRepository;
 
 
 
 
-    public NHPersonalInformationController(NHPersonalInformationService nhPersonalInformationService, NHCompanyCredentialsService nhCompanyCredentialsService, DeptRepository deptRepository, ManagerRepository managerRepository) {
+    public NHPersonalInformationController(NHPersonalInformationService nhPersonalInformationService, NHCompanyCredentialsService nhCompanyCredentialsService, DeptRepository deptRepository, ManagerRepository managerRepository, NHCompanyCredentialsRepository nhCompanyCredentialsRepository) {
         this.nhPersonalInformationService = nhPersonalInformationService;
         this.nhCompanyCredentialsService = nhCompanyCredentialsService;
         this.deptRepository = deptRepository;
         this.managerRepository = managerRepository;
+        this.nhCompanyCredentialsRepository = nhCompanyCredentialsRepository;
     }
 
     @GetMapping("/all-newhires-personal")
@@ -53,6 +57,7 @@ public class NHPersonalInformationController {
         model.addAttribute("nhPersonal", new NHPersonalInformation());
         model.addAttribute("dept", deptRepository.findAll());
         model.addAttribute("manager", managerRepository.findAll());
+        model.addAttribute("companyCredentials", nhCompanyCredentialsService.getAllNHCredentials());
         return "add-dept-manager";
     }
     // need to create custom query so you know who is head of what dept
