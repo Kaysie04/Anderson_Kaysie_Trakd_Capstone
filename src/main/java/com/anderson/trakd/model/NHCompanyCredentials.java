@@ -7,11 +7,17 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "nhcompany")
-public class NHCompanyCredentials {
+public class NHCompanyCredentials implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name= "db_id")
+    private Long dbId;
+
+
+
     @Column(name = "employee_id")
     private String employeeId;
 
@@ -29,12 +35,22 @@ public class NHCompanyCredentials {
 
 
     public NHCompanyCredentials(){};
-    public NHCompanyCredentials(String employeeId, String companyEmail, String password, String jobTitle, String salary) {
+
+    public NHCompanyCredentials(Long dbId, String employeeId, String companyEmail, String password, String jobTitle, String salary) {
+        this.dbId = dbId;
         this.employeeId = employeeId;
         this.companyEmail = companyEmail;
         this.password = password;
         this.jobTitle = jobTitle;
         this.salary = salary;
+    }
+
+    public Long getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(Long dbId) {
+        this.dbId = dbId;
     }
 
     public String getEmployeeId() {
@@ -82,18 +98,19 @@ public class NHCompanyCredentials {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NHCompanyCredentials that = (NHCompanyCredentials) o;
-        return Objects.equals(employeeId, that.employeeId) && Objects.equals(companyEmail, that.companyEmail) && Objects.equals(password, that.password) && Objects.equals(jobTitle, that.jobTitle) && Objects.equals(salary, that.salary);
+        return Objects.equals(dbId, that.dbId) && Objects.equals(employeeId, that.employeeId) && Objects.equals(companyEmail, that.companyEmail) && Objects.equals(password, that.password) && Objects.equals(jobTitle, that.jobTitle) && Objects.equals(salary, that.salary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeId, companyEmail, password, jobTitle, salary);
+        return Objects.hash(dbId, employeeId, companyEmail, password, jobTitle, salary);
     }
 
     @Override
     public String toString() {
         return "NHCompanyCredentials{" +
-                "employeeId='" + employeeId + '\'' +
+                "dbId=" + dbId +
+                ", employeeId='" + employeeId + '\'' +
                 ", companyEmail='" + companyEmail + '\'' +
                 ", password='" + password + '\'' +
                 ", jobTitle='" + jobTitle + '\'' +

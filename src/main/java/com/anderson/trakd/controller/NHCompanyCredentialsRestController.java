@@ -2,6 +2,7 @@ package com.anderson.trakd.controller;
 
 import com.anderson.trakd.model.NHCompanyCredentials;
 import com.anderson.trakd.service.NHCompanyCredentialsService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +18,9 @@ public class NHCompanyCredentialsRestController {
         this.nhCompanyCredentialsService = nhCompanyCredentialsService;
     }
 
-    /*
-       Create newhire first form information.
-       Retrieves JSON body and saves to database
-   */
+       //Create newhire first form information. Retrieves JSON body and saves to database
     @PostMapping("/generate-credentials")
-    public void createNewHireProfile(@RequestBody NHCompanyCredentials nhCompanyCredentials) {
+    public void createCredentials(@RequestBody NHCompanyCredentials nhCompanyCredentials) {
         nhCompanyCredentialsService.createCompanyCredentials(nhCompanyCredentials);
     }
 }

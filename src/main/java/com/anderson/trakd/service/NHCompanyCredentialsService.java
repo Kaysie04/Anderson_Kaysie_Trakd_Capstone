@@ -2,13 +2,11 @@ package com.anderson.trakd.service;
 
 
 import com.anderson.trakd.model.NHCompanyCredentials;
-import com.anderson.trakd.model.NHPersonalInformation;
 import com.anderson.trakd.repository.NHCompanyCredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NHCompanyCredentialsService {
@@ -28,7 +26,7 @@ public class NHCompanyCredentialsService {
     }
 
     /*
-   get a list of all credentials in nhCompany table
+   get a list of all credentials in nhcompany table
     */
     public List<NHCompanyCredentials> getAllNHCredentials(){
         return nhCompanyCredentialsRepository.findAll();

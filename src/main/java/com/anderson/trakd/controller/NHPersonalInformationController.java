@@ -28,7 +28,12 @@ public class NHPersonalInformationController {
 
 
 
-    public NHPersonalInformationController(NHPersonalInformationService nhPersonalInformationService, NHCompanyCredentialsService nhCompanyCredentialsService, DeptRepository deptRepository, ManagerRepository managerRepository, NHCompanyCredentialsRepository nhCompanyCredentialsRepository) {
+    public NHPersonalInformationController(NHPersonalInformationService nhPersonalInformationService,
+                                           NHCompanyCredentialsService nhCompanyCredentialsService,
+                                           DeptRepository deptRepository,
+                                           ManagerRepository managerRepository,
+                                           NHCompanyCredentialsRepository nhCompanyCredentialsRepository)
+    {
         this.nhPersonalInformationService = nhPersonalInformationService;
         this.nhCompanyCredentialsService = nhCompanyCredentialsService;
         this.deptRepository = deptRepository;
@@ -41,16 +46,9 @@ public class NHPersonalInformationController {
         model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
         nhPersonalInformationService.getAllNHPersonal();
         return "all-newhires-personal";
+        // I need to show associated employee Id's for input field next to table
     }
 
-    @GetMapping("/add-company-credentials")
-    public String renderAddCompanyCredentials(Model model) {
-        model.addAttribute("allNewHires", nhPersonalInformationService.getAllNHPersonal());
-        model.addAttribute("allCredentials", nhCompanyCredentialsService.getAllNHCredentials());
-        nhPersonalInformationService.getAllNHPersonal();
-        nhCompanyCredentialsService.getAllNHCredentials();
-        return "add-company-credentials";
-    }
 
     @GetMapping("/create-newhire")
     public String renderCreateNewHire(Model model){
@@ -58,11 +56,9 @@ public class NHPersonalInformationController {
         model.addAttribute("dept", deptRepository.findAll());
         model.addAttribute("manager", managerRepository.findAll());
         model.addAttribute("companyCredentials", nhCompanyCredentialsService.getAllNHCredentials());
-        return "add-dept-manager";
+        return "create-newhire";
     }
     // need to create custom query so you know who is head of what dept
-
-
 
     @PostMapping("/create-newhire")
     public String createNewHire(@ModelAttribute("nhPersonal") NHPersonalInformation nhPersonalInformation) {
@@ -71,56 +67,10 @@ public class NHPersonalInformationController {
         return"success";
     }
 
-//    @PutMapping("/add-company-credentials")
-//    public String addCompanyCredetials()
-
-//    @PutMapping("/add-company-credentials")
-//    public String addCredentials(@ModelAttribute("nhPersonal") NHPersonalInformation nhPersonal, @ModelAttribute("nhCompany")NHCompanyCredentials nhCompany){
-//        String employeeId = nhCompany.getEmployeeId();
-//        Long nhDbId = nhPersonal.getId();
-//        nhPersonalInformationService.addCompanyCredentials(nhDbId, employeeId);
-//        return "success";
-//    }
-
-    @PutMapping("/add-company-credentials")
-    public String addCredentials(@RequestParam(value = "nhPersonalId") Long nhPersonalId,
-                                 @RequestParam(value = "nhCompanyId") String nhCompanyId)
-    {
-        nhPersonalInformationService.addCompanyCredentials(nhPersonalId, nhCompanyId);
-        return "success";
-    }
-
 }
 
 
 
-
-
-
-
-//    @PutMapping("/add-company-credentials")
-//    public String addCredentials(@RequestParam(value = "nhPersonalId") Long nhPersonalId,
-//                                 @RequestParam(value = "nhCompanyId") String nhCompanyId)
-//    {
-//        nhPersonalInformationService.addCompanyCredentials(nhPersonalId, nhCompanyId);
-//        return "success";
-//    }
-
-
-//    @PutMapping("/{nhPersonalId}/add-credentials/{nhCompanyId}")
-//    public String addCredentials(@PathVariable Long nhPersonalId, @PathVariable String nhCompanyId) {
-//        nhPersonalInformationService.addCompanyCredentials(nhPersonalId, nhCompanyId);
-//        return "success";
-//    }
-
-
-
-//    @PostMapping("/add-company-credentials")
-//    public String addCompanyCredentials(@ModelAttribute NHPersonalInformation nhPersonalInformation, Model model) {
-//        nhPersonalInformationRepository.save(nhPersonalInformation);
-////        return "redirect:/employees";
-//        return "success";
-//    }
 
 
 
