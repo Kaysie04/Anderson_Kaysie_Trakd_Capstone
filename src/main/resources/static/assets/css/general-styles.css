@@ -111,10 +111,42 @@ body{
     color: #6a6a62;
     background-color:#e1e2e6;
 }
-/* .all-data .card-header{
+
+ .all-data .card-header{
 
     background-color:#a9a9a2;
-} */
+}
+
+/* all by any type of id table */
+#all-by-id{
+    margin-left:450px;
+}
+
+#all-by-title{
+    margin-left:550px;
+    margin-bottom:25px;
+    color: #6a6a62;
+    text-align:center;
+}
+
+/* submit button to query table */
+.searchBtn{
+    background-color:#a9a9a2;
+    color: #ebebeb;
+    border: solid 1.5px #ebebeb;
+    font-family:'AmstelvarAlpha';
+}
+
+/* the table when one newhire is displayed with company credentials*/
+#newhire-by-id-company{
+    margin-left:115px;
+}
+
+#newhire-by-id-company #title{
+    text-align:center;
+    font-size:20px;
+}
+
 
 
 

@@ -55,4 +55,12 @@ public class NHPersonalInformationService {
         }
     }
 
+    public List<NHPersonalInformation> getNHPersonalByDeptId(Long deptId){
+        return nhPersonalInformationRepository.findByDeptId(deptId);
+    }
+
+    public List<NHPersonalInformation> getNHPersonalByManagerId(Long managerId){
+        return nhPersonalInformationRepository.findByManagerId(managerId);
+    }
+
 }
