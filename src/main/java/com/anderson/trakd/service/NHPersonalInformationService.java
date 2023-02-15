@@ -67,4 +67,13 @@ public class NHPersonalInformationService {
         nhPersonalInformationRepository.deleteById(nhId);
     }
 
+    @Transactional
+    public void updateNHPhone(Long nhId, String phoneNumber) {
+        NHPersonalInformation nhPersonal = nhPersonalInformationRepository.getReferenceById(nhId);
+        if (nhPersonal!= null) {
+            nhPersonal.setPhoneNumber(phoneNumber);
+              nhPersonalInformationRepository.save(nhPersonal);
+        } else throw new IllegalStateException("not valid id number");
+    }
+
 }

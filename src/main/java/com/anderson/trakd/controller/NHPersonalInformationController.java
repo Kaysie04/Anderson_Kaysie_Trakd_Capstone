@@ -99,6 +99,37 @@ public class NHPersonalInformationController {
         return "success";
     }
 
+    @GetMapping("/update-phone")
+    public String renderUpdatePhone(Model model){
+        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
+        nhPersonalInformationService.getAllNHPersonal();
+        return "update-phone";
+    }
+
+
+    @PostMapping("/update-phone")
+    public String updatePhone(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber){
+        nhPersonalInformationService.updateNHPhone(nhId,phoneNumber);
+        return "success";
+    }
+
+//    @GetMapping("/update-phone-id")
+//    public String renderUpdateNHPhoneId(@RequestParam("nhId") Long nhId, Model model){
+//        NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
+//        model.addAttribute("newhire", nhPersonal );
+//        return "update-phone-id";
+//    }
+
+//    @PutMapping("/update-phone")
+//    public String updateNHPhoneId(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber){
+//        nhPersonalInformationService.updateNHPhone(nhId,phoneNumber);
+//        return "success";
+//    }
+
+
+
+
+
 }
 
 
