@@ -16,8 +16,6 @@ public class NHCompanyCredentials implements Serializable {
     @Column(name= "db_id")
     private Long dbId;
 
-
-
     @Column(name = "employee_id")
     private String employeeId;
 

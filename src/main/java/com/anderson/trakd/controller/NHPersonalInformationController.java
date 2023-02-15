@@ -5,16 +5,13 @@ import com.anderson.trakd.model.NHPersonalInformation;
 import com.anderson.trakd.repository.DeptRepository;
 import com.anderson.trakd.repository.ManagerRepository;
 import com.anderson.trakd.repository.NHCompanyCredentialsRepository;
-import com.anderson.trakd.repository.NHPersonalInformationRepository;
 import com.anderson.trakd.service.NHCompanyCredentialsService;
 import com.anderson.trakd.service.NHPersonalInformationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class NHPersonalInformationController {
@@ -26,9 +23,6 @@ public class NHPersonalInformationController {
     private final DeptRepository deptRepository;
     private final ManagerRepository managerRepository;
 
-    private final NHCompanyCredentialsRepository nhCompanyCredentialsRepository;
-    @Autowired
-    private NHPersonalInformationRepository nhPersonalInformationRepository;
 
     public NHPersonalInformationController(NHPersonalInformationService nhPersonalInformationService,
                                            NHCompanyCredentialsService nhCompanyCredentialsService,
@@ -40,14 +34,13 @@ public class NHPersonalInformationController {
         this.nhCompanyCredentialsService = nhCompanyCredentialsService;
         this.deptRepository = deptRepository;
         this.managerRepository = managerRepository;
-        this.nhCompanyCredentialsRepository = nhCompanyCredentialsRepository;
     }
 
     @GetMapping("/all-newhires-personal")
     public String getAllNewHiresPersonal(Model model) {
         model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
         nhPersonalInformationService.getAllNHPersonal();
-        return "all-newhires-personal";
+        return "all-newhires";
     }
 
 
@@ -91,6 +84,19 @@ public class NHPersonalInformationController {
         NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
         model.addAttribute("newhire", nhPersonal );
         return "newhire-by-id";
+    }
+
+    @GetMapping("/delete-newhire")
+    public String renderDeleteNH(Model model) {
+        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
+        nhPersonalInformationService.getAllNHPersonal();
+        return "delete-newhire";
+    }
+
+    @PostMapping("/delete-newhire")
+    public String deleteNH(@RequestParam("nhId") Long nhId){
+        nhPersonalInformationService.deleteNH(nhId);
+        return "success";
     }
 
 }

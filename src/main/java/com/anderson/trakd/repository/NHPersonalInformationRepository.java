@@ -11,4 +11,6 @@ public interface NHPersonalInformationRepository extends JpaRepository<NHPersona
 
     List<NHPersonalInformation> findByDeptId(Long deptId);
 
+
+
 }

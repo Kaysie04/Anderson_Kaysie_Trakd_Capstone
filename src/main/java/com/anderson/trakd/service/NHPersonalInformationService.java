@@ -63,4 +63,8 @@ public class NHPersonalInformationService {
         return nhPersonalInformationRepository.findByManagerId(managerId);
     }
 
+    public void deleteNH(Long nhId){
+        nhPersonalInformationRepository.deleteById(nhId);
+    }
+
 }
