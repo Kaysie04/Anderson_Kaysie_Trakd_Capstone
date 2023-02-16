@@ -10,59 +10,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <!-- external styles.css link-->
-  <link rel = "stylesheet" href = "assets/css/userhome.css">
+  <link rel = "stylesheet" href = "/assets/css/userhome.css">
 </head>
 <body>
+  <div th:replace="dropdown-navbar :: nav"></div>
 
-<nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="#">Trakd</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" class="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          New Hire Options
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Create New Hire Profile</a>
-          <div class="dropdown-divider"></div>
-          <span class = dropdown-header> Update New Hire Profile</span>
-          <a class="dropdown-item" href="#">Contact Information</a>
-          <a class="dropdown-item" href="#">Department and Manager</a>
-          <a class="dropdown-item" href="#">Company Credentials</a>
-          <div class="dropdown-divider"></div>
-          <span class = dropdown-header> New Hire Profiles</span>
-          <a class="dropdown-item" href="#">Search by Company I.D.</a>
-          <a class="dropdown-item" href="#">All Profiles</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Delete New Hire Profile</a>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" class="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Department Options
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#"> Search All Departments</a>
-          <a class="dropdown-item" href="#"> Search Specific Department</a>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" class="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manager Options
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Search All Managers</a>
-          <a class="dropdown-item" href="#">Search Specific Manager</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
 
 <div class="container-fluid">
   <div id = "welcome-display"  class="jumbotron text-center">

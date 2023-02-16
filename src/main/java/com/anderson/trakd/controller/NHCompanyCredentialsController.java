@@ -17,7 +17,7 @@ public class NHCompanyCredentialsController {
     }
 
 
-     //Render the generate company credentials for when you click submit it hits the post route /generate-credentials
+    //Render the generate company credentials for when you click submit it hits the post route /generate-credentials
 
     @GetMapping("/generate-credentials")
     public String renderGenerateCredentials(){

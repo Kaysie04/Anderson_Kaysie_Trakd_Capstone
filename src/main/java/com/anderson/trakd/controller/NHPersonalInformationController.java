@@ -43,6 +43,13 @@ public class NHPersonalInformationController {
         return "all-newhires";
     }
 
+    @GetMapping("/all-newhires")
+    public String getAllNewHires(Model model) {
+        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
+        nhPersonalInformationService.getAllNHPersonal();
+        return "all-newhires-general";
+    }
+
 
     @GetMapping("/create-newhire")
     public String renderCreateNewHire(Model model){
@@ -113,18 +120,12 @@ public class NHPersonalInformationController {
         return "success";
     }
 
-//    @GetMapping("/update-phone-id")
-//    public String renderUpdateNHPhoneId(@RequestParam("nhId") Long nhId, Model model){
-//        NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
-//        model.addAttribute("newhire", nhPersonal );
-//        return "update-phone-id";
-//    }
+    @GetMapping("/userhome")
+    public String renderUserHome(){
+        return "userhome";
+    }
 
-//    @PutMapping("/update-phone")
-//    public String updateNHPhoneId(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber){
-//        nhPersonalInformationService.updateNHPhone(nhId,phoneNumber);
-//        return "success";
-//    }
+
 
 
 

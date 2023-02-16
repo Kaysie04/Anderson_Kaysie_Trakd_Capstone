@@ -1,4 +1,3 @@
-
 // const variables connected to DOM
 const submitBtn = document.getElementById("submit-btn");
 const passwordInput = document.getElementById("password");
@@ -87,6 +86,5 @@ function saveNewHire(){
 submitBtn.addEventListener("click" , (e) => {
     e.preventDefault();
     saveNewHire();
-    //window.location.href = "http://localhost:8080/addAddress";
+    window.location.href = "http://localhost:8080/create-newhire";
 })
-
