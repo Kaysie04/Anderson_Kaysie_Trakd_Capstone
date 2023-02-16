@@ -1,0 +1,46 @@
+
+.navbar{
+    background-color: #a9a9a2;
+    height: 60px;
+    width: 100vw;
+    display: flex;
+    border-bottom: 1.5px solid #ebebeb;
+    margin-bottom: 80px;
+    font-family:'AmstelvarAlpha';
+}
+
+.navbar-brand{
+    color: #ebebeb;
+    font-size:50px;
+}
+
+.navbar-brand:hover{
+    color: #ebebeb;
+}
+
+body{
+    background-color:#e0d7d1;
+}
+
+.card-signin{
+
+    color: #787775;
+    border: solid 1.5px #ebebeb;
+    background-color: #ebebeb;
+    font-family:'AmstelvarAlpha';
+}
+
+.container input:hover{
+    border: solid 2px #787775;
+
+}
+
+.btn{
+    background-color:#a9a9a2;
+    color: #ebebeb;
+    border: solid 1.5px #ebebeb;
+    font-family:'AmstelvarAlpha';
+}
+
+
+
