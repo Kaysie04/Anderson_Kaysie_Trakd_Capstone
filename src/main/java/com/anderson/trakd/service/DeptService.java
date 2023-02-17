@@ -12,12 +12,12 @@ import java.util.List;
 @Service
 public class DeptService {
 
-    private final DeptRepository deptRepository;
-
     @Autowired
-    public DeptService(DeptRepository deptRepository) {
-        this.deptRepository = deptRepository;
-    }
+    DeptRepository deptRepository;
+
+//    public DeptService(DeptRepository deptRepository) {
+//        this.deptRepository = deptRepository;
+//    }
 
     public List<Dept> getAllDepts() {
         return deptRepository.findAll();

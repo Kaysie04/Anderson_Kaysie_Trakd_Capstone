@@ -3,8 +3,6 @@ const submitBtn = document.getElementById("submit-btn");
 const passwordInput = document.getElementById("password");
 const initialsInput = document.getElementById("initials");
 const employeeIdInput = document.getElementById("employee-id");
-const jobInput = document.getElementById("job-dropdown");
-const salaryInput = document.getElementById("salary-dropdown");
 
 // autogenerate password for employee company password
 function generatePassword(length) {
@@ -48,16 +46,12 @@ function saveNewHire(){
     let finalPassword = passwordInput.value
     let finalEmployeeId = employeeIdInput.value
     let finalEmail = generateEmail(initialsInput.value);
-    let selectedJob = jobInput.value;
-    let selectedSalary = salaryInput.value;
 
     // create object of variables to send in post requests
     let data = {
         "employeeId": finalEmployeeId,
         "companyEmail": finalEmail,
-        "password": finalPassword,
-        "jobTitle": selectedJob,
-        "salary": selectedSalary
+        "password": finalPassword
     }
     // set url for post request
     let url = "http://localhost:8080/generate-credentials"

@@ -1,5 +1,6 @@
 package com.anderson.trakd.repository;
 
+import com.anderson.trakd.model.NHCompanyCredentials;
 import com.anderson.trakd.model.NHPersonalInformation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,6 +12,6 @@ public interface NHPersonalInformationRepository extends JpaRepository<NHPersona
 
     List<NHPersonalInformation> findByDeptId(Long deptId);
 
-
+    List<NHPersonalInformation> findByJobTitle(String jobTitle);
 
 }

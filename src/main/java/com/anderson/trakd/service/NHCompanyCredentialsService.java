@@ -13,7 +13,6 @@ public class NHCompanyCredentialsService {
 
     private final NHCompanyCredentialsRepository nhCompanyCredentialsRepository;
 
-    @Autowired
     public NHCompanyCredentialsService(NHCompanyCredentialsRepository nhCompanyCredentialsRepository) {
         this.nhCompanyCredentialsRepository = nhCompanyCredentialsRepository;
     }
@@ -31,6 +30,7 @@ public class NHCompanyCredentialsService {
     public List<NHCompanyCredentials> getAllNHCredentials(){
         return nhCompanyCredentialsRepository.findAll();
     }
+
 
 
 }

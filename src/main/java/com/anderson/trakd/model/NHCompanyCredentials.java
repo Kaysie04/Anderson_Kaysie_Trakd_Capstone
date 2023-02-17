@@ -25,22 +25,13 @@ public class NHCompanyCredentials implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "job_title")
-    private String jobTitle;
-
-    @Column(name = "salary")
-    private String salary;
-
-
     public NHCompanyCredentials(){};
 
-    public NHCompanyCredentials(Long dbId, String employeeId, String companyEmail, String password, String jobTitle, String salary) {
+    public NHCompanyCredentials(Long dbId, String employeeId, String companyEmail, String password) {
         this.dbId = dbId;
         this.employeeId = employeeId;
         this.companyEmail = companyEmail;
         this.password = password;
-        this.jobTitle = jobTitle;
-        this.salary = salary;
     }
 
     public Long getDbId() {
@@ -75,33 +66,18 @@ public class NHCompanyCredentials implements Serializable {
         this.password = password;
     }
 
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
-    public String getSalary() {
-        return salary;
-    }
-
-    public void setSalary(String salary) {
-        this.salary = salary;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NHCompanyCredentials that = (NHCompanyCredentials) o;
-        return Objects.equals(dbId, that.dbId) && Objects.equals(employeeId, that.employeeId) && Objects.equals(companyEmail, that.companyEmail) && Objects.equals(password, that.password) && Objects.equals(jobTitle, that.jobTitle) && Objects.equals(salary, that.salary);
+        return Objects.equals(dbId, that.dbId) && Objects.equals(employeeId, that.employeeId) && Objects.equals(companyEmail, that.companyEmail) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dbId, employeeId, companyEmail, password, jobTitle, salary);
+        return Objects.hash(dbId, employeeId, companyEmail, password);
     }
 
     @Override
@@ -111,8 +87,6 @@ public class NHCompanyCredentials implements Serializable {
                 ", employeeId='" + employeeId + '\'' +
                 ", companyEmail='" + companyEmail + '\'' +
                 ", password='" + password + '\'' +
-                ", jobTitle='" + jobTitle + '\'' +
-                ", salary='" + salary + '\'' +
                 '}';
     }
 }

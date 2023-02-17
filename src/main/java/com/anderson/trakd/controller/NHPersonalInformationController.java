@@ -18,12 +18,9 @@ public class NHPersonalInformationController {
 
 
     private final NHPersonalInformationService nhPersonalInformationService;
-
     private final NHCompanyCredentialsService nhCompanyCredentialsService;
     private final DeptRepository deptRepository;
     private final ManagerRepository managerRepository;
-
-
     public NHPersonalInformationController(NHPersonalInformationService nhPersonalInformationService,
                                            NHCompanyCredentialsService nhCompanyCredentialsService,
                                            DeptRepository deptRepository,
@@ -86,12 +83,27 @@ public class NHPersonalInformationController {
         return "all-newhires-by-manager";
     }
 
+    @GetMapping("/allTitles")
+    public String renderAllTitles(){
+        return "all-titles";
+    }
+
+    @GetMapping("/newhires-by-title")
+    public String getNHByJob(@RequestParam("jobtitle")String jobTitle, Model model){
+        List<NHPersonalInformation> nhPersonalList = nhPersonalInformationService.getNHByJobTitle(jobTitle);
+        model.addAttribute("newhires", nhPersonalList);
+        return "all-newhires-by-title";
+    }
+
     @GetMapping("/newhire-by-id-company")
     public String getNHById(@RequestParam("nhId") Long nhId, Model model){
         NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
         model.addAttribute("newhire", nhPersonal );
         return "newhire-by-id";
     }
+
+
+
 
     @GetMapping("/delete-newhire")
     public String renderDeleteNH(Model model) {
@@ -119,19 +131,8 @@ public class NHPersonalInformationController {
         nhPersonalInformationService.updateNHPhone(nhId,phoneNumber);
         return "success";
     }
-
-    @GetMapping("/userhome")
-    public String renderUserHome(){
-        return "userhome";
-    }
-
-
-
-
-
-
-
 }
+
 
 
 

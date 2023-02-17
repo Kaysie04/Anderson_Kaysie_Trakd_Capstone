@@ -67,6 +67,29 @@
               <label for="zipcode"></label>
               <input type="text" class="form-control" id="zipcode" placeholder="Zipcode"th:field="*{zipcode}">
             </div>
+
+            <!--select job title-->
+            <div>
+              <label for="job-dropdown"> Select Job Title</label>
+              <select class = "dropdown" id="job-dropdown">
+                <option value = "Entry Software Engineer"> Entry Software Engineer</option>
+                <option value = "Junior Software Engineer"> Junior Software Engineer</option>
+                <option value = "Senior Software Engineer"> Senior Software Engineer</option>
+              </select>
+            </div>
+
+            <!--select salary-->
+            <div>
+              <label for="salary-dropdown">Select Starting Salary</label>
+              <select class = "dropdown" id="salary-dropdown">
+                <option value = "73000">$73,000</option>
+                <option value = "75000">$75,000</option>
+                <option value = "83000">$83,000</option>
+                <option value = "85000">$85,000</option>
+                <option value = "93000">$93,000</option>
+                <option value = "95000">$95,000</option>
+              </select>
+            </div>
             <!-- choose department from dropdown menu-->
             <label for="dept-dropdown">Select Department</label>
             <select id="dept-dropdown" class="form-control" th:field="*{dept}">
@@ -83,7 +106,7 @@
               <option value="" disabled selected> Select Manager</option>
               <option th:each="data : ${manager}"
                       th:value="${data.getId()}"
-                      th:text="${data.getName() + ': ' + data.getDept().getName()} + ' Department'">
+                      th:text="${data.getName() + ': ' + data.getDept().getName()}">
 
               </option>
             </select>

@@ -21,7 +21,7 @@ public class NHPersonalInformationService {
     private final DeptRepository deptRepository;
     private final ManagerRepository managerRepository;
 
-    @Autowired
+
     public NHPersonalInformationService(NHPersonalInformationRepository nhPersonalInformationRepository, NHCompanyCredentialsRepository nhCompanyCredentialsRepository, DeptRepository deptRepository, ManagerRepository managerRepository){
         this.nhPersonalInformationRepository = nhPersonalInformationRepository;
         this.nhCompanyCredentialsRepository = nhCompanyCredentialsRepository;
@@ -61,6 +61,10 @@ public class NHPersonalInformationService {
 
     public List<NHPersonalInformation> getNHPersonalByManagerId(Long managerId){
         return nhPersonalInformationRepository.findByManagerId(managerId);
+    }
+
+    public List<NHPersonalInformation> getNHByJobTitle(String jobTitle){
+        return nhPersonalInformationRepository.findByJobTitle(jobTitle);
     }
 
     public void deleteNH(Long nhId){

@@ -52,8 +52,15 @@ public class NHPersonalInformation implements Serializable {
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
+    @Column(name = "job_title")
+    private String jobTitle;
+
+    @Column(name = "salary")
+    private String salary;
+
     public NHPersonalInformation(){};
-    public NHPersonalInformation(Long id, String firstname, String lastname, String personalEmail, String phoneNumber, String street, String city, String state, String zipcode, NHCompanyCredentials companyCredentials, Dept dept, Manager manager) {
+
+    public NHPersonalInformation(Long id, String firstname, String lastname, String personalEmail, String phoneNumber, String street, String city, String state, String zipcode, NHCompanyCredentials companyCredentials, Dept dept, Manager manager, String jobTitle, String salary) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -66,6 +73,8 @@ public class NHPersonalInformation implements Serializable {
         this.companyCredentials = companyCredentials;
         this.dept = dept;
         this.manager = manager;
+        this.jobTitle = jobTitle;
+        this.salary = salary;
     }
 
     public Long getId() {
@@ -164,17 +173,34 @@ public class NHPersonalInformation implements Serializable {
         this.manager = manager;
     }
 
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NHPersonalInformation that = (NHPersonalInformation) o;
-        return Objects.equals(id, that.id) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(personalEmail, that.personalEmail) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zipcode, that.zipcode) && Objects.equals(companyCredentials, that.companyCredentials) && Objects.equals(dept, that.dept) && Objects.equals(manager, that.manager);
+        return Objects.equals(id, that.id) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(personalEmail, that.personalEmail) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zipcode, that.zipcode) && Objects.equals(companyCredentials, that.companyCredentials) && Objects.equals(dept, that.dept) && Objects.equals(manager, that.manager) && Objects.equals(jobTitle, that.jobTitle) && Objects.equals(salary, that.salary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, personalEmail, phoneNumber, street, city, state, zipcode, companyCredentials, dept, manager);
+        return Objects.hash(id, firstname, lastname, personalEmail, phoneNumber, street, city, state, zipcode, companyCredentials, dept, manager, jobTitle, salary);
     }
 
     @Override
@@ -192,6 +218,8 @@ public class NHPersonalInformation implements Serializable {
                 ", companyCredentials=" + companyCredentials +
                 ", dept=" + dept +
                 ", manager=" + manager +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", salary='" + salary + '\'' +
                 '}';
     }
 }

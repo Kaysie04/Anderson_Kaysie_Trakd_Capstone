@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "admin")
-public class Admin implements Serializable {
+@Table(name = "user")
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -23,13 +23,16 @@ public class Admin implements Serializable {
     @Column(name = "password")
     private String password;
 
-    public Admin() {
+    @Transient
+    boolean loggedIn;
+
+    public User() {
         this.name = "";
         this.email = "";
         this.password = "";
     }
 
-    public Admin(String name, String email, String password) {
+    public User(String name, String email, String password) {
         super();
         this.name = name;
         this.email = email;
@@ -68,12 +71,20 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Admin admin = (Admin) o;
-        return Objects.equals(id, admin.id) && Objects.equals(name, admin.name) && Objects.equals(email, admin.email) && Objects.equals(password, admin.password);
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
     @Override

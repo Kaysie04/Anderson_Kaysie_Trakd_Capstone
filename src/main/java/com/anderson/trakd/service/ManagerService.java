@@ -11,7 +11,6 @@ import java.util.List;
 public class ManagerService {
     private final ManagerRepository managerRepository;
 
-    @Autowired
     public ManagerService(ManagerRepository managerRepository){
         this.managerRepository = managerRepository;
     }
