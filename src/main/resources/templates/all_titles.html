@@ -1,51 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trakd.All.NewHires</title>
+    <title>Trakd.All.Job.Titles</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel = "stylesheet" href = "assets/css/general-styles.css">
 </head>
 <body>
 <!--template basic-navbar template only shows the home button-->
-<div th:replace="basic-navbar :: nav"></div>
+<div th:replace="basic_navbar :: nav"></div>
 
 <div class="container-fluid">
     <div class="row">
-        <div id = "all-newhires-page" class = "col-10 card-signin">
-            <div id = "all-newhires-page-title" class="card-header">
-                All NewHires
+        <div class="col-2">
+            <div class="card card-signin">
+                <div class="card-header">
+                    Enter Department ID
+                </div>
+                <div class="card-body">
+                    <form method="get" th:action="@{/newhires-by-title}">
+                        <div class="form-group">
+                            <label for="user-input">View All NewHires Under Specific Title:</label>
+                            <input type="text" class="form-control" id="user-input" name ="jobtitle">
+                        </div>
+                        <button type="submit" class ="searchBtn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class = "col-10 card-signin">
+            <div class="card-header">
+                NewHire Titles
             </div>
             <div class="card-body">
                 <table class="table table-striped table-bordered text-center">
                     <thead>
-                    <tr>
-                        <th> NewHire ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Street</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zipcode</th>
-
-                    </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="newhire : ${allNewhires}">
-                        <td th:text="${newhire.getId()}"></td>
-                        <td th:text="${newhire.getFirstname()}"></td>
-                        <td th:text="${newhire.getLastname()}"></td>
-                        <td th:text="${newhire.getPersonalEmail()}"></td>
-                        <td th:text="${newhire.getPhoneNumber()}"></td>
-                        <td th:text="${newhire.getStreet()}"></td>
-                        <td th:text="${newhire.getCity()}"></td>
-                        <td th:text="${newhire.getState()}"></td>
-                        <td th:text="${newhire.getZipcode()}"></td>
+                    <tr>
+                        <td> Entry Software Engineer</td>
+                    </tr>
+                    <tr>
+                        <td> Junior Software Engineer</td>
+                    </tr>
+                    <tr>
+                        <td> Senior Software Engineer</td>
                     </tr>
                     </tbody>
                 </table>
@@ -68,6 +71,7 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+
 
 
 

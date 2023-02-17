@@ -17,6 +17,6 @@ public class ManagerController {
     public String getAllManagers(Model model){
         model.addAttribute("manager", managerService.getAllManagers());
         managerService.getAllManagers();
-        return "all-managers";
+        return "all_managers";
     }
 }

@@ -19,11 +19,10 @@ public class NHPersonalInformationRepositoryTest {
 
     @Test
     public void testFindByManagerId() {
-        Long managerId = 1L;
+        Long managerId = 3L;
         List<NHPersonalInformation> personalInformationList = repository.findByManagerId(managerId);
         assertNotNull(personalInformationList, "Result list must not be null");
         assertFalse(personalInformationList.isEmpty(), "Result list must not be empty");
-
     }
 
     @Test
@@ -32,7 +31,8 @@ public class NHPersonalInformationRepositoryTest {
         List<NHPersonalInformation> personalInformationList = repository.findByDeptId(deptId);
         assertNotNull(personalInformationList, "Result list must not be null");
         assertFalse(personalInformationList.isEmpty(), "Result list must not be empty");
-
     }
+
+    // one more test in the repo findbyjobtitle
 
 }

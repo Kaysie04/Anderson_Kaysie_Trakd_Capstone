@@ -1,14 +1,8 @@
 package com.anderson.trakd.controller;
-import com.anderson.trakd.model.NHCompanyCredentials;
-import com.anderson.trakd.model.NHPersonalInformation;
 import com.anderson.trakd.service.NHCompanyCredentialsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.io.ByteArrayInputStream;
-import java.util.List;
 
 
 @Controller
@@ -26,14 +20,14 @@ public class NHCompanyCredentialsController {
 
     @GetMapping("/generate-credentials")
     public String renderGenerateCredentials(){
-        return "generate-credentials";
+        return "generate_credentials";
     }
 
     @GetMapping("/all-credentials")
     public String getAllCredentials(Model model){
         model.addAttribute("allCredentials", nhCompanyCredentialsService.getAllNHCredentials());
         nhCompanyCredentialsService.getAllNHCredentials();
-        return "all-credentials";
+        return "all_credentials";
     }
 
 

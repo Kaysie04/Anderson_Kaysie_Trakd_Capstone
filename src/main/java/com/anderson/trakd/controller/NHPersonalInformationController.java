@@ -37,14 +37,14 @@ public class NHPersonalInformationController {
     public String getAllNewHiresPersonal(Model model) {
         model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
         nhPersonalInformationService.getAllNHPersonal();
-        return "all-newhires";
+        return "all_newhires";
     }
 
     @GetMapping("/all-newhires")
     public String getAllNewHires(Model model) {
         model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
         nhPersonalInformationService.getAllNHPersonal();
-        return "all-newhires-general";
+        return "all_newhires_general";
     }
 
 
@@ -54,7 +54,7 @@ public class NHPersonalInformationController {
         model.addAttribute("dept", deptRepository.findAll());
         model.addAttribute("manager", managerRepository.findAll());
         model.addAttribute("companyCredentials", nhCompanyCredentialsService.getAllNHCredentials());
-        return "create-newhire";
+        return "create_newhire";
     }
 
 
@@ -71,7 +71,7 @@ public class NHPersonalInformationController {
         Dept deptName = deptRepository.getReferenceById(deptId);
         model.addAttribute("newhires", nhPersonalList );
         model.addAttribute("dept", deptName);
-        return "all-newhires-by-dept";
+        return "all_newhires_by_dept";
     }
 
     @GetMapping("/newhires-by-manager")
@@ -80,26 +80,26 @@ public class NHPersonalInformationController {
         Manager managerName = managerRepository.getReferenceById(managerId);
         model.addAttribute("newhires", nhPersonalList );
         model.addAttribute("manager", managerName);
-        return "all-newhires-by-manager";
+        return "all_newhires_by_manager";
     }
 
     @GetMapping("/allTitles")
     public String renderAllTitles(){
-        return "all-titles";
+        return "all_titles";
     }
 
     @GetMapping("/newhires-by-title")
     public String getNHByJob(@RequestParam("jobtitle")String jobTitle, Model model){
         List<NHPersonalInformation> nhPersonalList = nhPersonalInformationService.getNHByJobTitle(jobTitle);
         model.addAttribute("newhires", nhPersonalList);
-        return "all-newhires-by-title";
+        return "all_newhires_by_title";
     }
 
     @GetMapping("/newhire-by-id-company")
     public String getNHById(@RequestParam("nhId") Long nhId, Model model){
         NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
         model.addAttribute("newhire", nhPersonal );
-        return "newhire-by-id";
+        return "newhire_by_id";
     }
 
 
@@ -109,7 +109,7 @@ public class NHPersonalInformationController {
     public String renderDeleteNH(Model model) {
         model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
         nhPersonalInformationService.getAllNHPersonal();
-        return "delete-newhire";
+        return "delete_newhire";
     }
 
     @PostMapping("/delete-newhire")
@@ -122,7 +122,7 @@ public class NHPersonalInformationController {
     public String renderUpdatePhone(Model model){
         model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
         nhPersonalInformationService.getAllNHPersonal();
-        return "update-phone";
+        return "update_phone";
     }
 
 

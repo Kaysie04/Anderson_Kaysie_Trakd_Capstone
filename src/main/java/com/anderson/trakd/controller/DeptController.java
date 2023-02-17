@@ -19,7 +19,7 @@ public class DeptController {
     public String getAllDepts(Model model){
         model.addAttribute("dept", deptService.getAllDepts());
         deptService.getAllDepts();
-        return "all-depts";
+        return "all_depts";
     }
 
 }

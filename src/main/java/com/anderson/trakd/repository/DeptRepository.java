@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DeptRepository extends JpaRepository<Dept, Long> {
 
-    Optional<Dept> findById(int deptId);
 }
