@@ -13,6 +13,9 @@ public class DeptController {
     @Autowired
     private DeptRepository deptRepository;
 
+    // GET ROUTES
+
+    // Render page to display all 5 departments
     @GetMapping("/allDepts")
     public String getAllDepts(Model model){
         model.addAttribute("dept", deptRepository.findAll());

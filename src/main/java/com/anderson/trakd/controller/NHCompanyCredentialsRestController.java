@@ -22,7 +22,10 @@ public class NHCompanyCredentialsRestController {
         this.nhCompanyCredentialsService = nhCompanyCredentialsService;
     }
 
-    //Create newhire first form information. Retrieves JSON body and saves to database
+    //POST ROUTES
+
+    //Create newhire first form information.
+    // Retrieves JSON body and saves to database
     @PostMapping("/generate-credentials")
     public void createCredentials(@RequestBody NHCompanyCredentials nhCompanyCredentials) {
         nhCompanyCredentialsService.createCompanyCredentials(nhCompanyCredentials);

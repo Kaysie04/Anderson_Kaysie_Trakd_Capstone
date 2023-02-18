@@ -15,14 +15,16 @@ public class NHCompanyCredentialsController {
         this.nhCompanyCredentialsService = nhCompanyCredentialsService;
     }
 
+    // GET ROUTES
 
-    //Render the generate company credentials for when you click submit it hits the post route /generate-credentials
-
+    //Render generate company credentials form
+    // when you click submit it hits the post route /generate-credentials
     @GetMapping("/generate-credentials")
     public String renderGenerateCredentials(){
         return "generate_credentials";
     }
 
+    // Render list of company credentials in the nhcompany table
     @GetMapping("/all-credentials")
     public String getAllCredentials(Model model){
         model.addAttribute("allCredentials", nhCompanyCredentialsService.getAllNHCredentials());

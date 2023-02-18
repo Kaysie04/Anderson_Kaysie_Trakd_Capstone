@@ -2,7 +2,6 @@ package com.anderson.trakd.model;
 
 import java.io.Serializable;
 import java.util.Objects;
-
 import jakarta.persistence.*;
 @Entity
 @Table(name = "nhpersonal")
@@ -39,6 +38,12 @@ public class NHPersonalInformation implements Serializable {
     @Column(name = "zipcode")
     private String zipcode;
 
+    @Column(name = "job_title")
+    private String jobTitle;
+
+    @Column(name = "salary")
+    private String salary;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_credentials_id")
     private NHCompanyCredentials companyCredentials;
@@ -52,11 +57,7 @@ public class NHPersonalInformation implements Serializable {
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
-    @Column(name = "job_title")
-    private String jobTitle;
 
-    @Column(name = "salary")
-    private String salary;
 
     public NHPersonalInformation(){};
 

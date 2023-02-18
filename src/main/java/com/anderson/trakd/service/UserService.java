@@ -2,6 +2,7 @@ package com.anderson.trakd.service;
 
 import com.anderson.trakd.model.User;
 import com.anderson.trakd.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public void createUser(User user) throws Exception{
         User userExists = userRepository.findByEmail((user.getEmail()));
         if(userExists !=null){

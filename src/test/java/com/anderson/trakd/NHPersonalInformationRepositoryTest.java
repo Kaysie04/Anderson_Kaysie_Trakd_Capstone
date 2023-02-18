@@ -3,6 +3,8 @@ package com.anderson.trakd;
 import com.anderson.trakd.model.NHPersonalInformation;
 import com.anderson.trakd.repository.NHPersonalInformationRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,17 +19,17 @@ public class NHPersonalInformationRepositoryTest {
     @Autowired
     private NHPersonalInformationRepository repository;
 
-    @Test
-    public void testFindByManagerId() {
-        Long managerId = 3L;
+    @ParameterizedTest
+    @CsvSource({"3"})
+    public void testFindByManagerId(Long managerId) {
         List<NHPersonalInformation> personalInformationList = repository.findByManagerId(managerId);
         assertNotNull(personalInformationList, "Result list must not be null");
         assertFalse(personalInformationList.isEmpty(), "Result list must not be empty");
     }
 
-    @Test
-    public void testFindByDeptId(){
-        Long deptId = 1L;
+    @ParameterizedTest
+    @CsvSource({"1"})
+    public void testFindByDeptId(Long deptId){
         List<NHPersonalInformation> personalInformationList = repository.findByDeptId(deptId);
         assertNotNull(personalInformationList, "Result list must not be null");
         assertFalse(personalInformationList.isEmpty(), "Result list must not be empty");

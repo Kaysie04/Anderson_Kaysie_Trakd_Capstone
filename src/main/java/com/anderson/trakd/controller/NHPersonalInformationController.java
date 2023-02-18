@@ -4,9 +4,9 @@ import com.anderson.trakd.model.Manager;
 import com.anderson.trakd.model.NHPersonalInformation;
 import com.anderson.trakd.repository.DeptRepository;
 import com.anderson.trakd.repository.ManagerRepository;
-import com.anderson.trakd.repository.NHCompanyCredentialsRepository;
 import com.anderson.trakd.service.NHCompanyCredentialsService;
 import com.anderson.trakd.service.NHPersonalInformationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,40 +16,26 @@ import java.util.List;
 @Controller
 public class NHPersonalInformationController {
 
-
-    private final NHPersonalInformationService nhPersonalInformationService;
-    private final NHCompanyCredentialsService nhCompanyCredentialsService;
-    private final DeptRepository deptRepository;
-    private final ManagerRepository managerRepository;
-    public NHPersonalInformationController(NHPersonalInformationService nhPersonalInformationService,
-                                           NHCompanyCredentialsService nhCompanyCredentialsService,
-                                           DeptRepository deptRepository,
-                                           ManagerRepository managerRepository,
-                                           NHCompanyCredentialsRepository nhCompanyCredentialsRepository)
-    {
-        this.nhPersonalInformationService = nhPersonalInformationService;
-        this.nhCompanyCredentialsService = nhCompanyCredentialsService;
-        this.deptRepository = deptRepository;
-        this.managerRepository = managerRepository;
-    }
-
-    @GetMapping("/all-newhires-personal")
-    public String getAllNewHiresPersonal(Model model) {
-        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
-        nhPersonalInformationService.getAllNHPersonal();
-        return "all_newhires";
-    }
-
-    @GetMapping("/all-newhires")
-    public String getAllNewHires(Model model) {
-        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
-        nhPersonalInformationService.getAllNHPersonal();
-        return "all_newhires_general";
-    }
+    @Autowired
+    private NHPersonalInformationService nhPersonalInformationService;
+    @Autowired
+    private NHCompanyCredentialsService nhCompanyCredentialsService;
+    @Autowired
+    private DeptRepository deptRepository;
+    @Autowired
+    private ManagerRepository managerRepository;
 
 
+    // GET ROUTES
+
+    /*Render the main page for creating a newhire
+      displays a form for personal information
+      displays a list of depts
+      displays a list of managers
+      displays a list of credentials in order of creation
+    */
     @GetMapping("/create-newhire")
-    public String renderCreateNewHire(Model model){
+    public String createNewHire(Model model){
         model.addAttribute("nhPersonal", new NHPersonalInformation());
         model.addAttribute("dept", deptRepository.findAll());
         model.addAttribute("manager", managerRepository.findAll());
@@ -57,14 +43,43 @@ public class NHPersonalInformationController {
         return "create_newhire";
     }
 
-
-    @PostMapping("/create-newhire")
-    public String createNewHire(@ModelAttribute("nhPersonal") NHPersonalInformation nhPersonalInformation) {
-        nhPersonalInformationService.createNHPersonal(nhPersonalInformation);
-//        return "redirect:/employee";
-        return"success";
+    /*
+    displays page of all a newhires from nhpersonal table
+    will display an option to type in a newhire id number to get their company credentials information
+    that hits the /newhire-by-id-company route
+     */
+    @GetMapping("/all-newhires-personal")
+    public String getAllNewHiresPersonal(Model model) {
+        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
+        nhPersonalInformationService.getAllNHPersonal();
+        return "all_newhires";
     }
 
+    /*
+    shows the credentials of one newhire based on the input information from the /all-newhires-personal route
+     */
+    //BROKEN RIGHT NOW!!!!! 2/18 9:50am
+    @GetMapping("/newhire-by-id-company")
+    public String getNHById(@RequestParam("nhId") Long nhId, Model model){
+        NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
+        model.addAttribute("newhire", nhPersonal );
+        return "newhire_by_id";
+    }
+
+    /*
+     Renders a page that displays all personal information from the nhpersonal table
+     */
+    @GetMapping("/all-newhires")
+    public String getAllNewHires(Model model) {
+        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
+        nhPersonalInformationService.getAllNHPersonal();
+        return "all_newhires_general";
+    }
+
+    /*
+     displays all newhires that are under a specific department
+      option to choose from which dept is from /allDepts route
+    */
     @GetMapping("/newhires-by-dept")
     public String getAllNHByDeptId(@RequestParam("deptId") Long deptId, Model model){
         List<NHPersonalInformation> nhPersonalList = nhPersonalInformationService.getNHPersonalByDeptId(deptId);
@@ -74,6 +89,10 @@ public class NHPersonalInformationController {
         return "all_newhires_by_dept";
     }
 
+    /*
+    displays all newhires that are under a specific manager
+     option to choose from which manager is from /allManagers route
+   */
     @GetMapping("/newhires-by-manager")
     public String getAllNHByManagerId(@RequestParam("managerId") Long managerId, Model model){
         List<NHPersonalInformation> nhPersonalList = nhPersonalInformationService.getNHPersonalByManagerId(managerId);
@@ -83,6 +102,9 @@ public class NHPersonalInformationController {
         return "all_newhires_by_manager";
     }
 
+    /*
+     displays all job titles and displays an option to select all newhires under a specific job title
+      */
     @GetMapping("/allTitles")
     public String renderAllTitles(){
         return "all_titles";
@@ -95,16 +117,9 @@ public class NHPersonalInformationController {
         return "all_newhires_by_title";
     }
 
-    @GetMapping("/newhire-by-id-company")
-    public String getNHById(@RequestParam("nhId") Long nhId, Model model){
-        NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
-        model.addAttribute("newhire", nhPersonal );
-        return "newhire_by_id";
-    }
-
-
-
-
+    /*
+    renders all newhires from nhpersonal table and displays an option to delete a newhire based on their id
+     */
     @GetMapping("/delete-newhire")
     public String renderDeleteNH(Model model) {
         model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
@@ -112,12 +127,11 @@ public class NHPersonalInformationController {
         return "delete_newhire";
     }
 
-    @PostMapping("/delete-newhire")
-    public String deleteNH(@RequestParam("nhId") Long nhId){
-        nhPersonalInformationService.deleteNH(nhId);
-        return "success";
-    }
 
+    /*
+     renders all newhires from nhpersonal table
+     displays an option to update a newhire's phone number based on their id
+     */
     @GetMapping("/update-phone")
     public String renderUpdatePhone(Model model){
         model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
@@ -126,6 +140,25 @@ public class NHPersonalInformationController {
     }
 
 
+
+
+    // POST ROUTES
+
+    // submits request to save input information to nhpersonal table
+    @PostMapping("/create-newhire")
+    public String createNewHire(@ModelAttribute("nhPersonal") NHPersonalInformation nhPersonalInformation) {
+        nhPersonalInformationService.createNHPersonal(nhPersonalInformation);
+        return"success";
+    }
+
+    // submits request to delete newhire from nhpersonal table
+    @PostMapping("/delete-newhire")
+    public String deleteNH(@RequestParam("nhId") Long nhId){
+        nhPersonalInformationService.deleteNH(nhId);
+        return "success";
+    }
+
+    //submits request to update phone number in nhpersonal table
     @PostMapping("/update-phone")
     public String updatePhone(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber){
         nhPersonalInformationService.updateNHPhone(nhId,phoneNumber);

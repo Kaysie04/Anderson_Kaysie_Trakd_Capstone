@@ -3,6 +3,7 @@ package com.anderson.trakd.service;
 
 import com.anderson.trakd.model.NHCompanyCredentials;
 import com.anderson.trakd.repository.NHCompanyCredentialsRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,16 +17,16 @@ public class NHCompanyCredentialsService {
         this.nhCompanyCredentialsRepository = nhCompanyCredentialsRepository;
     }
 
-    /*
-    create  new employee credentials and insert into nhcompany table
-     */
+
+    //create  new employee credentials and insert into nhcompany table
+    @Transactional
     public void createCompanyCredentials(NHCompanyCredentials nhCompanyCredentials) {
         nhCompanyCredentialsRepository.save(nhCompanyCredentials);
     }
 
-    /*
-   get a list of all credentials in nhcompany table
-    */
+
+   //get a list of all credentials in nhcompany table
+    @Transactional
     public List<NHCompanyCredentials> getAllNHCredentials(){
         return nhCompanyCredentialsRepository.findAll();
     }

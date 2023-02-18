@@ -80,5 +80,5 @@ function saveNewHire(){
 submitBtn.addEventListener("click" , (e) => {
     e.preventDefault();
     saveNewHire();
-    window.location.href = "http://localhost:8080/create-newhire";
+    window.location.replace("http://localhost:8080/create-newhire");
 })

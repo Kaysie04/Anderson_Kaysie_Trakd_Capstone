@@ -12,7 +12,9 @@ public class ManagerController {
     private ManagerRepository managerRepository;
 
 
+    // GET ROUTES
 
+    // Render page to display all 5 managers
     @GetMapping("/allManagers")
     public String getAllManagers(Model model){
         model.addAttribute("manager", managerRepository.findAll());

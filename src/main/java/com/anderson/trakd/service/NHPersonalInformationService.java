@@ -27,14 +27,13 @@ public class NHPersonalInformationService {
 
 
     //create a new employee and insert into nhPersonal table
-
+    @Transactional
     public void createNHPersonal(NHPersonalInformation nhPersonal){
         nhPersonalInformationRepository.save(nhPersonal);
     }
 
 
     //get a list of all employees in nhPersonal table
-
     public List<NHPersonalInformation> getAllNHPersonal(){
         return nhPersonalInformationRepository.findAll();
     }
@@ -51,22 +50,28 @@ public class NHPersonalInformationService {
         }
     }
 
+    // return a list of newhires under a specific department
     public List<NHPersonalInformation> getNHPersonalByDeptId(Long deptId){
         return nhPersonalInformationRepository.findByDeptId(deptId);
     }
 
+    // return a list of newhires under a specific manager
     public List<NHPersonalInformation> getNHPersonalByManagerId(Long managerId){
         return nhPersonalInformationRepository.findByManagerId(managerId);
     }
 
+    // return a list of newhires under a specific job title
     public List<NHPersonalInformation> getNHByJobTitle(String jobTitle){
         return nhPersonalInformationRepository.findByJobTitle(jobTitle);
     }
 
+    // delete a newhire from the nhpersonal table
+    @Transactional
     public void deleteNH(Long nhId){
         nhPersonalInformationRepository.deleteById(nhId);
     }
 
+    // update a newhire phone number
     @Transactional
     public void updateNHPhone(Long nhId, String phoneNumber) {
         NHPersonalInformation nhPersonal = nhPersonalInformationRepository.getReferenceById(nhId);

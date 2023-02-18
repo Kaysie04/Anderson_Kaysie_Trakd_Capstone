@@ -56,6 +56,7 @@ public class UserController2 {
         return "redirect:/";
     }
 
+
     // SIGNUP ROUTES
     @GetMapping("/signup")
     public String renderSignup(Model model) {
@@ -97,7 +98,6 @@ public class UserController2 {
         return "home";
     }
 
-
     // USERHOME ROUTES
         @GetMapping("/userhome")
     public String renderUserHome(HttpSession session) {
@@ -110,3 +110,4 @@ public class UserController2 {
         }
     }
 }
+ // LOGIN:: ONLY ERRORS WITH INVALID PASSWORD WHEN IT IS AN INVALID EMAIL THE WHOLE PAGE ERRORS
