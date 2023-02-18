@@ -18,7 +18,7 @@ public class UserRepositoryTest {
     @Test
     public void testFindByEmail(){
 
-        String email = "test@test.com";
+        String email = "test2345@test.com";
         User expected = new User("test", email, "password");
         userRepository.save(expected);
 

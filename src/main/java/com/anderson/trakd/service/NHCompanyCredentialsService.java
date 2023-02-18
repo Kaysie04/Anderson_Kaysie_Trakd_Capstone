@@ -3,7 +3,6 @@ package com.anderson.trakd.service;
 
 import com.anderson.trakd.model.NHCompanyCredentials;
 import com.anderson.trakd.repository.NHCompanyCredentialsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +29,5 @@ public class NHCompanyCredentialsService {
     public List<NHCompanyCredentials> getAllNHCredentials(){
         return nhCompanyCredentialsRepository.findAll();
     }
-
-
 
 }

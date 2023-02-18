@@ -15,19 +15,15 @@ import java.util.List;
 
 @Service
 public class NHPersonalInformationService {
+    @Autowired
+    private NHPersonalInformationRepository nhPersonalInformationRepository;
+    @Autowired
+    private NHCompanyCredentialsRepository nhCompanyCredentialsRepository;
+    @Autowired
+    private DeptRepository deptRepository;
+    @Autowired
+    private ManagerRepository managerRepository;
 
-    private final NHPersonalInformationRepository nhPersonalInformationRepository;
-    private final NHCompanyCredentialsRepository nhCompanyCredentialsRepository;
-    private final DeptRepository deptRepository;
-    private final ManagerRepository managerRepository;
-
-
-    public NHPersonalInformationService(NHPersonalInformationRepository nhPersonalInformationRepository, NHCompanyCredentialsRepository nhCompanyCredentialsRepository, DeptRepository deptRepository, ManagerRepository managerRepository){
-        this.nhPersonalInformationRepository = nhPersonalInformationRepository;
-        this.nhCompanyCredentialsRepository = nhCompanyCredentialsRepository;
-        this.deptRepository = deptRepository;
-        this.managerRepository = managerRepository;
-    }
 
 
     //create a new employee and insert into nhPersonal table
