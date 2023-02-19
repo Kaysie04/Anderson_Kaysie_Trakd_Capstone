@@ -5,7 +5,6 @@ import com.anderson.trakd.repository.UserRepository;
 import com.anderson.trakd.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.naming.AuthenticationException;
 import java.security.SecureRandom;
 
 @Controller
@@ -34,19 +32,22 @@ public class UserController2 {
 
     @PostMapping("/login")
     public String loginUser(@RequestParam String email, @RequestParam String password, HttpSession session, Model model){
+        // Check for invalid email
+        User sessionUser = userRepository.findByEmail(email);
+        if (sessionUser == null) {
+            model.addAttribute("errorMessage", "Invalid email");
+            return "login2";
+        }
 
-        try{
-            User sessionUser = userRepository.findByEmail(email);
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            if(encoder.matches(password, sessionUser.getPassword())) {
-                session.setAttribute("user", email);
-                return "redirect:/userhome";
+        // Check for invalid password
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(password, sessionUser.getPassword())) {
+            model.addAttribute("errorMessage", "Invalid password");
+            return "login2";
+        }
 
-            } throw new AuthenticationException();
-            } catch (AuthenticationException e){
-                model.addAttribute("errorMessage", "Invalid email or password");
-                return "login2";
-            }
+        session.setAttribute("user", email);
+        return "redirect:/userhome";
     }
 
     // LOGOUT ROUTE
@@ -67,16 +68,20 @@ public class UserController2 {
 
     @PostMapping("/signup")
     public String signupSubmit(@ModelAttribute User user, HttpSession session, Model model) throws Exception {
+
         User userExists = userRepository.findByEmail(user.getEmail());
+        // if email already exists error will pop up
         if (userExists != null) {
             model.addAttribute("error", "Email is already taken");
             return "signup2";
         }
         try {
-        int strength = 10;
+            // encrypt entered password
+            int strength = 10;
             BCryptPasswordEncoder bcryptEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
             String encodedPassword = bcryptEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
+            // save user information
             userService.createUser(user);
             session.setAttribute("user", user.getEmail());
             return "redirect:/userhome";
@@ -99,15 +104,14 @@ public class UserController2 {
     }
 
     // USERHOME ROUTES
-        @GetMapping("/userhome")
-    public String renderUserHome(HttpSession session) {
+    @GetMapping("/userhome")
+    public String renderUserHome(HttpSession session, Model model) {
         String email = (String) session.getAttribute("user");
         if (email != null) {
-            ResponseEntity.ok();
+            model.addAttribute("userEmail", email);
             return "dashboard";
         } else {
-            return "error";
+            return "redirect:/login";
         }
     }
 }
- // LOGIN:: ONLY ERRORS WITH INVALID PASSWORD WHEN IT IS AN INVALID EMAIL THE WHOLE PAGE ERRORS

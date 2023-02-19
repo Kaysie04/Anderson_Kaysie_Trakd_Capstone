@@ -58,13 +58,32 @@ public class NHPersonalInformationController {
     /*
     shows the credentials of one newhire based on the input information from the /all-newhires-personal route
      */
-    //BROKEN RIGHT NOW!!!!! 2/18 9:50am
+//    @GetMapping("/newhire-by-id-company")
+//    public String getNHById(@RequestParam("nhId") Long nhId, Model model) throws Exception {
+//        NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
+//
+//        try {
+//            if (nhPersonal != null) {
+//                model.addAttribute("newhire", nhPersonal);
+//                return "newhire_by_id";
+//            } else if (!(nhId instanceof Long)) {
+//                throw new Exception();
+//            }
+//        } catch Exception
+//    }
+
     @GetMapping("/newhire-by-id-company")
-    public String getNHById(@RequestParam("nhId") Long nhId, Model model){
-        NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
-        model.addAttribute("newhire", nhPersonal );
-        return "newhire_by_id";
+    public String getNHById(@RequestParam("nhId") Long nhId, Model model) {
+
+        NHPersonalInformation nhPersonal = null;
+        try {
+            nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
+        } catch (Exception e) {
+            return "error_page";
+        }
+        return "error_page";
     }
+
 
     /*
      Renders a page that displays all personal information from the nhpersonal table
@@ -82,11 +101,16 @@ public class NHPersonalInformationController {
     */
     @GetMapping("/newhires-by-dept")
     public String getAllNHByDeptId(@RequestParam("deptId") Long deptId, Model model){
-        List<NHPersonalInformation> nhPersonalList = nhPersonalInformationService.getNHPersonalByDeptId(deptId);
-        Dept deptName = deptRepository.getReferenceById(deptId);
-        model.addAttribute("newhires", nhPersonalList );
-        model.addAttribute("dept", deptName);
-        return "all_newhires_by_dept";
+        List<NHPersonalInformation> nhPersonalList = null;
+        try {
+            nhPersonalList = nhPersonalInformationService.getNHPersonalByDeptId(deptId);
+            Dept deptName = deptRepository.getReferenceById(deptId);
+            model.addAttribute("newhires", nhPersonalList );
+            model.addAttribute("dept", deptName);
+            return "all_newhires_by_dept";
+        } catch (Exception e) {
+            return "error_page";
+        }
     }
 
     /*
@@ -95,11 +119,16 @@ public class NHPersonalInformationController {
    */
     @GetMapping("/newhires-by-manager")
     public String getAllNHByManagerId(@RequestParam("managerId") Long managerId, Model model){
-        List<NHPersonalInformation> nhPersonalList = nhPersonalInformationService.getNHPersonalByManagerId(managerId);
-        Manager managerName = managerRepository.getReferenceById(managerId);
-        model.addAttribute("newhires", nhPersonalList );
-        model.addAttribute("manager", managerName);
-        return "all_newhires_by_manager";
+        List<NHPersonalInformation> nhPersonalList = null;
+        try {
+            nhPersonalList = nhPersonalInformationService.getNHPersonalByManagerId(managerId);
+            Manager managerName = managerRepository.getReferenceById(managerId);
+            model.addAttribute("newhires", nhPersonalList );
+            model.addAttribute("manager", managerName);
+            return "all_newhires_by_manager";
+        } catch (Exception e) {
+            return "error_page";
+        }
     }
 
     /*
@@ -112,9 +141,14 @@ public class NHPersonalInformationController {
 
     @GetMapping("/newhires-by-title")
     public String getNHByJob(@RequestParam("jobtitle")String jobTitle, Model model){
-        List<NHPersonalInformation> nhPersonalList = nhPersonalInformationService.getNHByJobTitle(jobTitle);
-        model.addAttribute("newhires", nhPersonalList);
-        return "all_newhires_by_title";
+        List<NHPersonalInformation> nhPersonalList = null;
+        try {
+            nhPersonalList = nhPersonalInformationService.getNHByJobTitle(jobTitle);
+            model.addAttribute("newhires", nhPersonalList);
+            return "all_newhires_by_title";
+        } catch (Exception e) {
+            return "error_page";
+        }
     }
 
     /*
@@ -127,7 +161,6 @@ public class NHPersonalInformationController {
         return "delete_newhire";
     }
 
-
     /*
      renders all newhires from nhpersonal table
      displays an option to update a newhire's phone number based on their id
@@ -138,9 +171,6 @@ public class NHPersonalInformationController {
         nhPersonalInformationService.getAllNHPersonal();
         return "update_phone";
     }
-
-
-
 
     // POST ROUTES
 
@@ -159,10 +189,21 @@ public class NHPersonalInformationController {
     }
 
     //submits request to update phone number in nhpersonal table
+//    @PostMapping("/update-phone")
+//    public String updatePhone(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber){
+//        nhPersonalInformationService.updateNHPhone(nhId,phoneNumber);
+//        return "success";
+//    }
+
     @PostMapping("/update-phone")
-    public String updatePhone(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber){
-        nhPersonalInformationService.updateNHPhone(nhId,phoneNumber);
-        return "success";
+    public String updatePhone(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber, Model model) {
+        try {
+            nhPersonalInformationService.updateNHPhone(nhId, phoneNumber);
+            return "success";
+        } catch (Exception e) {
+            model.addAttribute("error", "An error occurred while updating the phone number");
+            return "error_page";
+        }
     }
 }
 

@@ -10,6 +10,9 @@ import com.anderson.trakd.repository.NHPersonalInformationRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
 import java.util.List;
 
 
@@ -39,30 +42,44 @@ public class NHPersonalInformationService {
     }
 
 
-    public NHPersonalInformation getNHPersonalById(Long nhId) {
-        boolean exists = nhPersonalInformationRepository.existsById(nhId);
-        if(!exists) {
-            throw new IllegalStateException("NewHire not found with given id");
-        }
-        else {
+
+    public NHPersonalInformation getNHPersonalById(Long nhId) throws Exception {
+        try {
             NHPersonalInformation nhPersonal = nhPersonalInformationRepository.getReferenceById(nhId);
             return nhPersonal;
+        } catch (IllegalArgumentException ex) {
+            throw new Exception("Invalid input type. Please enter a valid ID");
+        } catch (Exception ex) {
+            throw new Exception("Invalid Input");
         }
     }
 
+
     // return a list of newhires under a specific department
-    public List<NHPersonalInformation> getNHPersonalByDeptId(Long deptId){
-        return nhPersonalInformationRepository.findByDeptId(deptId);
+    public List<NHPersonalInformation> getNHPersonalByDeptId(Long deptId) throws Exception {
+        List<NHPersonalInformation> nhPersonalList = nhPersonalInformationRepository.findByDeptId(deptId);
+        if(!nhPersonalList.isEmpty()){
+            return nhPersonalList;
+        } throw new Exception("Invalid Input");
+
     }
 
     // return a list of newhires under a specific manager
-    public List<NHPersonalInformation> getNHPersonalByManagerId(Long managerId){
-        return nhPersonalInformationRepository.findByManagerId(managerId);
+    public List<NHPersonalInformation> getNHPersonalByManagerId(Long managerId) throws Exception {
+        List<NHPersonalInformation> nhPersonalList = nhPersonalInformationRepository.findByManagerId(managerId);
+        if(!nhPersonalList.isEmpty()){
+            return nhPersonalList;
+        } throw new Exception("Invalid Input");
+
     }
 
     // return a list of newhires under a specific job title
-    public List<NHPersonalInformation> getNHByJobTitle(String jobTitle){
-        return nhPersonalInformationRepository.findByJobTitle(jobTitle);
+    public List<NHPersonalInformation> getNHByJobTitle(String jobTitle) throws Exception {
+            List<NHPersonalInformation> nhPersonalList = nhPersonalInformationRepository.findByJobTitle(jobTitle);
+            if(!nhPersonalList.isEmpty()){
+                return nhPersonalList;
+            } throw new Exception();
+
     }
 
     // delete a newhire from the nhpersonal table
@@ -73,12 +90,12 @@ public class NHPersonalInformationService {
 
     // update a newhire phone number
     @Transactional
-    public void updateNHPhone(Long nhId, String phoneNumber) {
+    public void updateNHPhone(Long nhId, String phoneNumber) throws Exception {
         NHPersonalInformation nhPersonal = nhPersonalInformationRepository.getReferenceById(nhId);
         if (nhPersonal!= null) {
             nhPersonal.setPhoneNumber(phoneNumber);
-              nhPersonalInformationRepository.save(nhPersonal);
-        } else throw new IllegalStateException("not valid id number");
+            nhPersonalInformationRepository.save(nhPersonal);
+        } else throw new Exception("Invalid Input");
     }
 
 }
