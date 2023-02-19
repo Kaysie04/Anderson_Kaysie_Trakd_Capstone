@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <!-- external styles.css link-->
-    <link rel="stylesheet" href="assets/css/general-styles.css">
+    <link rel="stylesheet" href="assets/css/general_styles.css">
 </head>
 <body>
 
@@ -97,34 +97,39 @@
                             </select>
                         </div>
                         <!-- choose department from dropdown menu-->
-                        <label for="dept-dropdown">Select Department</label>
-                        <select id="dept-dropdown" class="form-control" th:field="*{dept}">
-                            <option value="" disabled selected>Select Department</option>
-                            <option th:each="data : ${dept}"
-                                    th:value="${data.getId()}"
-                                    th:text="${data.getName()}">
-                            </option>
-                        </select>
+                        <div>
+                            <label for="dept-dropdown">Select Department</label>
+                            <select id="dept-dropdown" class="dropdown" th:field="*{dept}">
+                                <option value="" disabled selected>Select Department</option>
+                                <option th:each="data : ${dept}"
+                                        th:value="${data.getId()}"
+                                        th:text="${data.getName()}">
+                                </option>
+                            </select>
+                        </div>
 
                         <!-- choose manager from dropdown menu-->
-                        <label for="manager-dropdown">Select Manager</label>
-                        <select id="manager-dropdown" class="form-control" th:field="*{manager}">
-                            <option value="" disabled selected> Select Manager</option>
-                            <option th:each="data : ${manager}"
-                                    th:value="${data.getId()}"
-                                    th:text="${data.getName() + ': ' + data.getDept().getName()}">
+                        <div>
+                            <label for="manager-dropdown">Select Manager</label>
+                            <select id="manager-dropdown" class="dropdown" th:field="*{manager}">
+                                <option th:each="data : ${manager}"
+                                        th:value="${data.getId()}"
+                                        th:text="${data.getName() + ': ' + data.getDept().getName()}">
+                                </option>
+                            </select>
+                        </div>
 
-                            </option>
-                        </select>
                         <!-- choose generated employeedId from dropdown menu-->
-                        <label for="credentials-dropdown">Select Employee ID</label>
-                        <select id="credentials-dropdown" class="form-control" th:field="*{companyCredentials}">
-                            <option value="" disabled selected>Select Employee ID</option>
-                            <option th:each="data : ${companyCredentials}"
-                                    th:value="${data.getDbId()}"
-                                    th:text="${data.getDbId()+ ': #' + data.getEmployeeId()}">
-                            </option>
-                        </select>
+                        <div>
+                            <label for="credentials-dropdown">Select Employee ID</label>
+                            <select id="credentials-dropdown" class="dropdown" th:field="*{companyCredentials}">
+                                <option th:each="data : ${companyCredentials}"
+                                        th:value="${data.getDbId()}"
+                                        th:text="${data.getDbId()+ ': #' + data.getEmployeeId()}">
+                                </option>
+                            </select>
+                        </div>
+
                         <button class="btn" type="submit"> Continue</button>
                     </form>
                 </div>

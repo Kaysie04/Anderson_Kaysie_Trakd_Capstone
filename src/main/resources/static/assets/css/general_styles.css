@@ -46,7 +46,8 @@
 /* general body */
 
 body{
-    background-color:#e0d7d1;
+    /*background-color:#e0d7d1;*/
+    background-color: white;
     font-family:'AmstelvarAlpha';
 }
 
@@ -59,41 +60,31 @@ body{
     font-family:'AmstelvarAlpha';
 }
 
-#job-dropdown{
-    margin-bottom:25px;
-}
-
-#salary-dropdown{
-    margin-bottom:25px;
-}
-
-/* general form submit button */
-.btn{
-    background-color:#a9a9a2;
-    color: #ebebeb;
-    border: solid 1.5px #ebebeb;
-    font-family:'AmstelvarAlpha';
-    margin-left:150px;
-}
-
-.btn:hover{
-    background-color: #ebebeb;
-}
-
-
 /* select menu in create newhire page */
 
 #dept-dropdown{
     margin-top:15px;
     margin-bottom:25px;
+    margin-left: 20px;
 }
 
 #manager-dropdown{
     margin-bottom: 25px;
+    margin-left: 38px;
 }
 
 #credentials-dropdown{
     margin-bottom: 25px;
+    margin-left: 10px;
+}
+
+#job-dropdown{
+    margin-bottom:25px;
+    margin-left: 40px;
+}
+
+#salary-dropdown{
+    margin-bottom:10px;
 }
 
 .select{
@@ -153,6 +144,19 @@ body{
 #all-newhires-page-title {
    text-align:center;
     font-size:20px;
+}
+
+/* general form submit button */
+.btn{
+    background-color:#a9a9a2;
+    color: #ebebeb;
+    border: solid 1.5px #ebebeb;
+    font-family:'AmstelvarAlpha';
+    margin-left:150px;
+}
+
+.btn:hover{
+    border: solid #ebebeb;
 }
 
 

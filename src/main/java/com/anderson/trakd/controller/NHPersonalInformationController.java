@@ -6,6 +6,7 @@ import com.anderson.trakd.repository.DeptRepository;
 import com.anderson.trakd.repository.ManagerRepository;
 import com.anderson.trakd.service.NHCompanyCredentialsService;
 import com.anderson.trakd.service.NHPersonalInformationService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +37,7 @@ public class NHPersonalInformationController {
     */
     @GetMapping("/create-newhire")
     public String createNewHire(Model model){
+
         model.addAttribute("nhPersonal", new NHPersonalInformation());
         model.addAttribute("dept", deptRepository.findAll());
         model.addAttribute("manager", managerRepository.findAll());
