@@ -10,20 +10,20 @@
 }
 
 .navbar-brand{
-    color: #ebebeb;
+    color: white;
     font-size:50px;
 }
 
 .navbar-brand:hover{
-    color: #ebebeb;
+    color: white;
 }
 
 .nav-link{
-    color: #ebebeb;
+    color: white;
 }
 
 .nav-link:hover{
-    color: #ebebeb;
+    color: white;
 }
 
 .dropdown a:hover {
@@ -50,12 +50,13 @@
 
 body{
     /*background-color:#e0d7d1;*/
-    background-color: black;
+    background-color: rgba(0, 0, 0,0.7);
+    font-family:'AmstelvarAlpha';
 }
 
 #welcome-display{
     background-color:#a9a9a2;
-    color:#ebebeb;
+    color:white;
     border: solid 1.5px #ebebeb;
     font-weight: 400;
 }
@@ -78,5 +79,4 @@ body{
     height: 200px;
     width: 700px;
     margin-left: 250px;
-
 }

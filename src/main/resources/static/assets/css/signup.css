@@ -10,7 +10,7 @@
 }
 
 .navbar-brand{
-    color: #ebebeb;
+    color: white;
     font-size:50px;
 }
 
@@ -20,11 +20,12 @@
 
 body{
     /*background-color:#e0d7d1;*/
-    background-color: black;
+    background-color: rgba(0, 0, 0,0.7);
+    font-family:'AmstelvarAlpha';
+    /*opacity: 0.5;*/
 }
 
 .card-signin{
-
     color: #787775;
     border: solid 1.5px #ebebeb;
     background-color: #ebebeb;
@@ -38,33 +39,33 @@ body{
 
 .btn{
     background-color:#a9a9a2;
-    color: #ebebeb;
+    color: white;
     border: solid 1.5px #ebebeb;
     font-family:'AmstelvarAlpha';
     margin-left: 170px;
 }
 
 .btn:hover{
-    background-color: green;
+    background-color: rgba(0, 128, 0, 0.6);
     color: white;
 }
 
 .subBtnText{
-    color: black;
+    color: #787775;
     margin-left: 155px;
 }
 
 .subBtnText:hover{
-    color: green;
+    color: rgba(0, 128, 0, 0.6);
 }
 
 .subBtn{
-    color: black;
+    color: #787775;
     margin-left: 140px;
 }
 
 .subBtn:hover{
-    color: green;
+    color: rgba(0, 128, 0, 0.6);
 }
 
 

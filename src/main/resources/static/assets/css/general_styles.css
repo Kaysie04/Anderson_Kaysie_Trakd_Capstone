@@ -7,26 +7,26 @@
     border-bottom: 1.5px solid #ebebeb;
     margin-bottom: 40px;
     font-family:'AmstelvarAlpha';
-    color: #ebebeb;
+    color: white;
 }
 
 .navbar-brand{
-    color: #ebebeb;
+    color: white;
     font-size:50px;
 }
 
 .navbar-brand:hover{
-    color: #ebebeb;
+    color: white;
 }
 
 .nav-link{
-    color: #ebebeb;
+    color: white;
     font-size: 20px;
 }
 
 .navbar a:hover {
     background-color: transparent;
-    color: #ebebeb;
+    color: white;
 }
 
 .dropdown {
@@ -47,7 +47,7 @@
 
 body{
     /*background-color:#e0d7d1;*/
-    background-color: black;
+    background-color: rgba(0, 0, 0,0.7);
     font-family:'AmstelvarAlpha';
 }
 
@@ -121,9 +121,16 @@ body{
 /* submit button to query table */
 .searchBtn{
     background-color:#a9a9a2;
-    color: #ebebeb;
+    color: white;
     border: solid 1.5px #ebebeb;
     font-family:'AmstelvarAlpha';
+    border-radius: 5px;
+    margin-left: 35px;
+}
+
+.searchBtn:hover{
+    background-color: rgba(0, 128, 0, 0.6);
+    color: white;
 }
 
 /* the table when one newhire is displayed with company credentials*/
@@ -158,6 +165,16 @@ body{
 .btn:hover{
     border: solid #ebebeb;
 }
+
+.data-card{
+    color: #787775;
+    border: solid 1.5px #ebebeb;
+    background-color: #ebebeb;
+    font-family:'AmstelvarAlpha';
+    border-radius: 5px;
+
+}
+
 
 
 
