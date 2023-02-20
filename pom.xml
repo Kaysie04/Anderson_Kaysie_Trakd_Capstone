@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.anderson</groupId>
-    <artifactId>Trakd</artifactId>
+    <artifactId>Anderson_Kaysie_Trakd_CaseStudy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Trakd</name>
     <description>Trakd</description>

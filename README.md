@@ -44,6 +44,8 @@ SO THAT I can save time and ensure that all new hires receive all necessary comp
 
 💾 Go to localhost:8080/ in your web browser.
 
-## Contributing
+## GitHub Link
+https://github.com/Kaysie04/Anderson_Kaysie_Trakd_Capstone
 
+## Contributing
  [Kaysie A](https://github.com/Kaysie04)
