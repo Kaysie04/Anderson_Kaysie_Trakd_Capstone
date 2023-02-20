@@ -25,7 +25,7 @@ public class NHCompanyCredentials implements Serializable {
     @Column(name = "password")
     private String password;
 
-    public NHCompanyCredentials(){};
+    public NHCompanyCredentials(){}
 
     public NHCompanyCredentials(Long dbId, String employeeId, String companyEmail, String password) {
         this.dbId = dbId;

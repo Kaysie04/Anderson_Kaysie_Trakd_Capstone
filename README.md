@@ -38,9 +38,9 @@ SO THAT I can save time and ensure that all new hires receive all necessary comp
 
 💾 Configure applications.properties for your own mysql database.
 
-💾 Copy schema from schema file and enter into your database.
-
 💾 Run application as SpringBoot App.
+
+💾 Copy schema from schema file and enter into your database.
 
 💾 Go to localhost:8080/ in your web browser.
 

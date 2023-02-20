@@ -59,7 +59,7 @@ public class NHPersonalInformation implements Serializable {
 
 
 
-    public NHPersonalInformation(){};
+    public NHPersonalInformation(){}
 
     public NHPersonalInformation(Long id, String firstname, String lastname, String personalEmail, String phoneNumber, String street, String city, String state, String zipcode, NHCompanyCredentials companyCredentials, Dept dept, Manager manager, String jobTitle, String salary) {
         this.id = id;

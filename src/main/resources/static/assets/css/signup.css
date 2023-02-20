@@ -20,7 +20,7 @@
 
 body{
     /*background-color:#e0d7d1;*/
-    background-color: white;
+    background-color: black;
 }
 
 .card-signin{
@@ -41,6 +41,30 @@ body{
     color: #ebebeb;
     border: solid 1.5px #ebebeb;
     font-family:'AmstelvarAlpha';
+    margin-left: 170px;
+}
+
+.btn:hover{
+    background-color: green;
+    color: white;
+}
+
+.subBtnText{
+    color: black;
+    margin-left: 155px;
+}
+
+.subBtnText:hover{
+    color: green;
+}
+
+.subBtn{
+    color: black;
+    margin-left: 140px;
+}
+
+.subBtn:hover{
+    color: green;
 }
 
 

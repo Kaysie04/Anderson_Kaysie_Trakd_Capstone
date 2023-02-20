@@ -20,13 +20,13 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/login">Already have an account? Login here</a>
-            </li>
-        </ul>
-    </div>
+<!--    <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--        <ul class="navbar-nav">-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="http://localhost:8080/login">Already have an account? Login here</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
 </nav>
 
 <div class="container">
@@ -54,6 +54,7 @@
                         </div>
                         <div th:if="${error}" style="color: red" th:text="${error}"></div>
                         <button class="btn" type="submit">Submit</button>
+                        <a class ="nav-link subBtnText" href="http://localhost:8080/login">Login Here</a>
                     </form>
                 </div>
             </div>
