@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.SecureRandom;
 
@@ -25,10 +26,6 @@ public class UserController {
 
 
     // LOGIN ROUTES
-//    @GetMapping("/login")
-//    public String renderLogin(){
-//        return "login2";
-//    }
     @GetMapping("/login")
     public String login(Model model, HttpSession session) {
         if (session.getAttribute("user") != null) {
@@ -39,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestParam String email, @RequestParam String password, HttpSession session, Model model){
+    public String loginUser(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         // Check for invalid email
         User sessionUser = userRepository.findByEmail(email);
         if (sessionUser == null) {
@@ -74,16 +71,6 @@ public class UserController {
         return "signup";
     }
 
-//    @GetMapping("/signup")
-//    public String renderSignup(Model model, HttpSession session) {
-//        if (session.getAttribute("user") != null) {
-//            return "redirect:/userhome";
-//        }
-//        model.addAttribute("user", new User());
-//        return "signup2";
-//    }
-
-
     @PostMapping("/signup")
     public String signupSubmit(@ModelAttribute User user, HttpSession session, Model model) throws Exception {
 
@@ -101,11 +88,10 @@ public class UserController {
             user.setPassword(encodedPassword);
             // save user information
             userService.createUser(user);
-           session.setAttribute("user", user.getEmail());
-//            user.setLoggedIn(true);
+            session.setAttribute("user", user.getEmail());
             return "redirect:/userhome";
 
-        }catch (Exception e){
+        } catch (Exception e) {
             String error = "Invalid input was entered!";
             model.addAttribute("error", error);
             return "signup";
@@ -113,7 +99,7 @@ public class UserController {
 
     }
 
-        @GetMapping("/")
+    @GetMapping("/")
     public String renderHomepage(HttpSession session, Model model) {
         String email = (String) session.getAttribute("user");
         if (email != null) {
@@ -121,16 +107,6 @@ public class UserController {
         }
         return "home";
     }
-
-//    @GetMapping("/")
-//    public String renderHomepage(HttpSession session, Model model) {
-//        String email = (String) session.getAttribute("user");
-//        if (email != null) {
-//            return "redirect:/userhome";
-//        }
-//        return "home";
-//    }
-
 
 
     // USERHOME ROUTES
@@ -145,14 +121,34 @@ public class UserController {
         }
     }
 
-//    @GetMapping("/userhome")
-//    public String renderUserHome(HttpSession session, Model model) {
-//        User user = userRepository.findByEmail((String) session.getAttribute("user"));
-//        if (user.isLoggedIn()) {
-//            model.addAttribute("userEmail", user.getEmail());
-//            return "dashboard";
-//        } else {
-//            return "redirect:/login";
-//        }
-//    }
+    // DELETE USER ACCOUNT
+
+    @GetMapping("/delete")
+    public String renderDeleteForm(HttpSession session, Model model) {
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            model.addAttribute("userEmail", email);
+            return "delete";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+
+
+
+    @PostMapping("/delete")
+    public String deleteAccount(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
+        User sessionUser = userRepository.findByEmail(email);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (sessionUser != null && encoder.matches(password, sessionUser.getPassword()) && email.equals(sessionUser.getEmail())) {
+            userRepository.delete(sessionUser); // delete user account
+            session.invalidate();
+            return "redirect:/";
+        } else {
+            model.addAttribute("errorMessage", "Invalid email or password");
+            return "delete";
+        }
+    }
+
 }

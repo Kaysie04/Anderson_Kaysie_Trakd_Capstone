@@ -10,20 +10,20 @@
     <link rel="stylesheet" href="assets/css/general_styles.css">
 </head>
 <body>
-<!--template basic-navbar template only shows the home button-->
-<div th:replace="~{basic_navbar :: nav}"></div>
+<!--template dropdown_navbar template for dashboard pages, shows all user options-->
+<div th:replace="dropdown_navbar :: nav"></div>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
             <div class="card data-card">
                 <div class="card-header">
-                    Enter New Hire ID Number
+                    Delete All Information
                 </div>
                 <div class="card-body">
                     <form method="post" th:action="@{/delete-newhire}">
                         <div class="form-group">
-                            <label for="user-input">Delete from Company Database</label>
+                            <label for="user-input">Enter New Hire ID Number</label>
                             <input type="text" class="form-control" id="user-input" name="nhId">
                         </div>
                         <button type="submit" class="searchBtn">Submit</button>

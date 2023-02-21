@@ -6,7 +6,6 @@ import com.anderson.trakd.repository.DeptRepository;
 import com.anderson.trakd.repository.ManagerRepository;
 import com.anderson.trakd.service.NHCompanyCredentialsService;
 import com.anderson.trakd.service.NHPersonalInformationService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,10 +79,14 @@ public class NHPersonalInformationController {
         NHPersonalInformation nhPersonal = null;
         try {
             nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
+            if(nhPersonal != null){
+                model.addAttribute("newhire", nhPersonal);
+                return"newhire_by_id";
+            }
         } catch (Exception e) {
-            return "error_page";
+            return "error";
         }
-        return "error_page";
+        return "error";
     }
 
 
@@ -111,7 +114,7 @@ public class NHPersonalInformationController {
             model.addAttribute("dept", deptName);
             return "all_newhires_by_dept";
         } catch (Exception e) {
-            return "error_page";
+            return "error";
         }
     }
 
@@ -129,7 +132,7 @@ public class NHPersonalInformationController {
             model.addAttribute("manager", managerName);
             return "all_newhires_by_manager";
         } catch (Exception e) {
-            return "error_page";
+            return "error";
         }
     }
 
@@ -149,7 +152,7 @@ public class NHPersonalInformationController {
             model.addAttribute("newhires", nhPersonalList);
             return "all_newhires_by_title";
         } catch (Exception e) {
-            return "error_page";
+            return "error";
         }
     }
 
@@ -184,18 +187,11 @@ public class NHPersonalInformationController {
     }
 
     // submits request to delete newhire from nhpersonal table
-    @PostMapping("/delete-newhire")
+    @DeleteMapping("/delete-newhire")
     public String deleteNH(@RequestParam("nhId") Long nhId){
         nhPersonalInformationService.deleteNH(nhId);
         return "success";
     }
-
-    //submits request to update phone number in nhpersonal table
-//    @PostMapping("/update-phone")
-//    public String updatePhone(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber){
-//        nhPersonalInformationService.updateNHPhone(nhId,phoneNumber);
-//        return "success";
-//    }
 
     @PostMapping("/update-phone")
     public String updatePhone(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber, Model model) {
@@ -204,7 +200,7 @@ public class NHPersonalInformationController {
             return "success";
         } catch (Exception e) {
             model.addAttribute("error", "An error occurred while updating the phone number");
-            return "error_page";
+            return "error";
         }
     }
 }

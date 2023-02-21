@@ -2,7 +2,6 @@ package com.anderson.trakd;
 
 import com.anderson.trakd.model.NHPersonalInformation;
 import com.anderson.trakd.repository.NHPersonalInformationRepository;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,5 @@ public class NHPersonalInformationRepositoryTest {
         assertNotNull(personalInformationList, "Result list must not be null");
         assertFalse(personalInformationList.isEmpty(), "Result list must not be empty");
     }
-
-    // one more test in the repo findbyjobtitle
 
 }

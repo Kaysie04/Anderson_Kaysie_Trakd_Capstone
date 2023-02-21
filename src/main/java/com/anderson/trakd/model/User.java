@@ -23,9 +23,6 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Transient
-    boolean loggedIn;
-
     public User() {
         this.name = "";
         this.email = "";
@@ -69,14 +66,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
     }
 
     @Override

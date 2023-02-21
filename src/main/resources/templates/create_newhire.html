@@ -14,8 +14,8 @@
 </head>
 <body>
 
-<!--template basic-navbar template only shows the home button-->
-<div th:replace="~{basic_navbar :: nav}"></div>
+<!--template dropdown_navbar template for dashboard pages, shows all user options-->
+<div th:replace="dropdown_navbar :: nav"></div>
 
 <div class="container">
     <div class="row">
@@ -77,7 +77,7 @@
                         <!--select job title-->
                         <div>
                             <label for="job-dropdown"> Select Job Title</label>
-                            <select class="dropdown" id="job-dropdown" th:field="*{jobTitle}">
+                            <select class="dropdown-form" id="job-dropdown" th:field="*{jobTitle}">
                                 <option value="Entry Software Engineer"> Entry Software Engineer </option>
                                 <option value="Junior Software Engineer"> Junior Software Engineer</option>
                                 <option value="Senior Software Engineer"> Senior Software Engineer</option>
@@ -87,7 +87,7 @@
                         <!--select salary-->
                         <div>
                             <label for="salary-dropdown">Select Starting Salary</label>
-                            <select class="dropdown" id="salary-dropdown" th:field="*{salary}">
+                            <select class="dropdown-form" id="salary-dropdown" th:field="*{salary}">
                                 <option value="73000">$73,000</option>
                                 <option value="75000">$75,000</option>
                                 <option value="83000">$83,000</option>
@@ -99,7 +99,7 @@
                         <!-- choose department from dropdown menu-->
                         <div>
                             <label for="dept-dropdown">Select Department</label>
-                            <select id="dept-dropdown" class="dropdown" th:field="*{dept}">
+                            <select id="dept-dropdown" class="dropdown-form" th:field="*{dept}">
                                 <option value="" disabled selected>Select Department</option>
                                 <option th:each="data : ${dept}"
                                         th:value="${data.getId()}"
@@ -111,7 +111,7 @@
                         <!-- choose manager from dropdown menu-->
                         <div>
                             <label for="manager-dropdown">Select Manager</label>
-                            <select id="manager-dropdown" class="dropdown" th:field="*{manager}">
+                            <select id="manager-dropdown" class="dropdown-form" th:field="*{manager}">
                                 <option th:each="data : ${manager}"
                                         th:value="${data.getId()}"
                                         th:text="${data.getName() + ': ' + data.getDept().getName()}">
@@ -122,7 +122,7 @@
                         <!-- choose generated employeedId from dropdown menu-->
                         <div>
                             <label for="credentials-dropdown">Select Employee ID</label>
-                            <select id="credentials-dropdown" class="dropdown" th:field="*{companyCredentials}">
+                            <select id="credentials-dropdown" class="dropdown-form" th:field="*{companyCredentials}">
                                 <option th:each="data : ${companyCredentials}"
                                         th:value="${data.getDbId()}"
                                         th:text="${data.getDbId()+ ': #' + data.getEmployeeId()}">

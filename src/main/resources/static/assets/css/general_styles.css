@@ -5,9 +5,8 @@
     width: 100vw;
     display: flex;
     border-bottom: 1.5px solid #ebebeb;
-    margin-bottom: 40px;
+    margin-bottom: 80px;
     font-family:'AmstelvarAlpha';
-    color: white;
 }
 
 .navbar-brand{
@@ -21,15 +20,35 @@
 
 .nav-link{
     color: white;
-    font-size: 20px;
 }
 
-.navbar a:hover {
-    background-color: transparent;
+.nav-link:hover{
     color: white;
 }
 
-.dropdown {
+.dropdown a:hover {
+    background-color: transparent;
+    color: #E7F6F2;
+}
+
+.nav-item div a:hover{
+    background-color:#a9a9a2;
+    color:#787775;
+}
+.nav-item div a{
+    color: #787775;
+}
+
+.dropdown-menu{
+    background-color:#ebebeb;
+
+}
+
+.dropdown-divider{
+    background-color:#036264;
+}
+ /*end of test css*/
+.dropdown-form {
     font-size: 15px;
     padding: 7px;
     background-color:#a9a9a2;
@@ -38,11 +57,10 @@
     border-radius:5px;
     color: #ebebeb;
 }
-.dropdown option:hover{
+.dropdown-form option:hover{
     color:white;
     background-color: #395B64;
 }
-
 /* general body */
 
 body{
@@ -153,17 +171,19 @@ body{
     font-size:20px;
 }
 
-/* general form submit button */
+/* newhire form submit button */
 .btn{
     background-color:#a9a9a2;
-    color: #ebebeb;
+    color: white;
     border: solid 1.5px #ebebeb;
     font-family:'AmstelvarAlpha';
+    border-radius: 5px;
     margin-left:150px;
 }
 
 .btn:hover{
-    border: solid #ebebeb;
+    background-color: rgba(0, 128, 0, 0.6);
+    color: white;
 }
 
 .data-card{

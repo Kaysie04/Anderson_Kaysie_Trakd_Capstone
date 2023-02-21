@@ -1,4 +1,4 @@
-
+#
 # INSERT INTO dept (name) VALUES ('Front-End');
 # INSERT INTO dept (name) VALUES ('Back-End');
 # INSERT INTO dept (name) VALUES ('QA');

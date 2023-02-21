@@ -18,11 +18,18 @@
     color: #ebebeb;
 }
 
+.nav-link{
+    color: white;
+}
+
+.nav-link:hover{
+    color: white;
+}
+
 body{
-    /*background-color:#e0d7d1;*/
     background-color: rgba(0, 0, 0,0.7);
     font-family:'AmstelvarAlpha';
-    /*opacity: 0.5;*/
+
 }
 
 .card-signin{
@@ -67,6 +74,22 @@ body{
 .subBtn:hover{
     color: rgba(0, 128, 0, 0.6);
 }
+
+#deleteBtn{
+    background-color:#a9a9a2;
+    color: white;
+    border: solid 1.5px #ebebeb;
+    font-family:'AmstelvarAlpha';
+    margin-left: 170px;
+    border-radius: 5px;
+
+}
+
+#deleteBtn:hover{
+    background-color: rgba(255, 0, 0, 0.6);
+    color: white;
+}
+
 
 
 
