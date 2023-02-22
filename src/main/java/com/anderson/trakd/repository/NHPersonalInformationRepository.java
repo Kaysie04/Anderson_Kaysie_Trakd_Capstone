@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface NHPersonalInformationRepository extends JpaRepository<NHPersonalInformation, Long> {
 
-    @Override
-    Optional<NHPersonalInformation> findById(Long aLong);
 
     List<NHPersonalInformation> findByManagerId(Long managerId);
 

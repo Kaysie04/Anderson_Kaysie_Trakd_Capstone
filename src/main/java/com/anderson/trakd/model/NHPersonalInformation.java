@@ -3,6 +3,8 @@ package com.anderson.trakd.model;
 import java.io.Serializable;
 import java.util.Objects;
 import jakarta.persistence.*;
+
+// POJO for nhpersonal
 @Entity
 @Table(name = "nhpersonal")
 public class NHPersonalInformation implements Serializable {

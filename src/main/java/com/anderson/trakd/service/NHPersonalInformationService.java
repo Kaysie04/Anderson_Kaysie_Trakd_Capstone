@@ -27,8 +27,6 @@ public class NHPersonalInformationService {
     @Autowired
     private ManagerRepository managerRepository;
 
-
-
     //create a new employee and insert into nhPersonal table
     @Transactional
     public void createNHPersonal(NHPersonalInformation nhPersonal){
@@ -42,7 +40,7 @@ public class NHPersonalInformationService {
     }
 
 
-
+    // get information of specific employee
     public NHPersonalInformation getNHPersonalById(Long nhId) throws Exception {
         try {
             NHPersonalInformation nhPersonal = nhPersonalInformationRepository.getReferenceById(nhId);
@@ -80,12 +78,6 @@ public class NHPersonalInformationService {
                 return nhPersonalList;
             } throw new Exception();
 
-    }
-
-    // delete a newhire from the nhpersonal table
-    @Transactional
-    public void deleteNH(Long nhId){
-        nhPersonalInformationRepository.deleteById(nhId);
     }
 
     // update a newhire phone number

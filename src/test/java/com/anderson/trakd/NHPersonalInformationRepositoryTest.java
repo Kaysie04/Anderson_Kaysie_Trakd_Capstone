@@ -34,4 +34,12 @@ public class NHPersonalInformationRepositoryTest {
         assertFalse(personalInformationList.isEmpty(), "Result list must not be empty");
     }
 
+    @ParameterizedTest
+    @CsvSource({"Entry Software Engineer"})
+    public void testFindByJobTitle(String jobTitle){
+        List<NHPersonalInformation> personalInformationList = repository.findByJobTitle(jobTitle);
+        assertNotNull(personalInformationList, "Result list must not be null");
+        assertFalse(personalInformationList.isEmpty(), "Result list must not be empty");
+    }
+
 }

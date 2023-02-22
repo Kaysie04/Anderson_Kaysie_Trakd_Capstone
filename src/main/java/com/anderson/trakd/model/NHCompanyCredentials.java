@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+// POJO for nhcompany
 @Entity
 @Table(name = "nhcompany")
 public class NHCompanyCredentials implements Serializable {

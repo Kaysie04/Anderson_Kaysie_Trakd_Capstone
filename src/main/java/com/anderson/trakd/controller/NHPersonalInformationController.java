@@ -6,6 +6,7 @@ import com.anderson.trakd.repository.DeptRepository;
 import com.anderson.trakd.repository.ManagerRepository;
 import com.anderson.trakd.service.NHCompanyCredentialsService;
 import com.anderson.trakd.service.NHPersonalInformationService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,13 +36,19 @@ public class NHPersonalInformationController {
       displays a list of credentials in order of creation
     */
     @GetMapping("/create-newhire")
-    public String createNewHire(Model model){
-
-        model.addAttribute("nhPersonal", new NHPersonalInformation());
-        model.addAttribute("dept", deptRepository.findAll());
-        model.addAttribute("manager", managerRepository.findAll());
-        model.addAttribute("companyCredentials", nhCompanyCredentialsService.getAllNHCredentials());
-        return "create_newhire";
+    public String createNewHire(HttpSession session, Model model) {
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            model.addAttribute("userEmail", email);
+            model.addAttribute("nhPersonal", new NHPersonalInformation());
+            model.addAttribute("dept", deptRepository.findAll());
+            model.addAttribute("manager", managerRepository.findAll());
+            model.addAttribute("companyCredentials", nhCompanyCredentialsService.getAllNHCredentials());
+            return "create_newhire";
+        } else {
+            return "redirect:/login";
+        }
     }
 
     /*
@@ -50,42 +57,40 @@ public class NHPersonalInformationController {
     that hits the /newhire-by-id-company route
      */
     @GetMapping("/all-newhires-personal")
-    public String getAllNewHiresPersonal(Model model) {
-        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
-        nhPersonalInformationService.getAllNHPersonal();
-        return "all_newhires";
+    public String getAllNewHiresPersonal(HttpSession session, Model model) {
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
+            nhPersonalInformationService.getAllNHPersonal();
+            return "all_newhires";
+        } else {
+            return "redirect:/login";
+        }
     }
 
     /*
     shows the credentials of one newhire based on the input information from the /all-newhires-personal route
      */
-//    @GetMapping("/newhire-by-id-company")
-//    public String getNHById(@RequestParam("nhId") Long nhId, Model model) throws Exception {
-//        NHPersonalInformation nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
-//
-//        try {
-//            if (nhPersonal != null) {
-//                model.addAttribute("newhire", nhPersonal);
-//                return "newhire_by_id";
-//            } else if (!(nhId instanceof Long)) {
-//                throw new Exception();
-//            }
-//        } catch Exception
-//    }
-
     @GetMapping("/newhire-by-id-company")
-    public String getNHById(@RequestParam("nhId") Long nhId, Model model) {
-
-        NHPersonalInformation nhPersonal = null;
-        try {
-            nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
-            if(nhPersonal != null){
-                model.addAttribute("newhire", nhPersonal);
-                return"newhire_by_id";
+    public String getNHById(@RequestParam("nhId") Long nhId, HttpSession session, Model model) {
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            NHPersonalInformation nhPersonal = null;
+            try {
+                nhPersonal = nhPersonalInformationService.getNHPersonalById(nhId);
+                if (nhPersonal != null) {
+                    model.addAttribute("newhire", nhPersonal);
+                    return "newhire_by_id";
+                }
+            } catch (Exception e) {
+                return "error";
             }
-        } catch (Exception e) {
-            return "error";
+        } else {
+            return "redirect:/login";
         }
+
         return "error";
     }
 
@@ -94,10 +99,16 @@ public class NHPersonalInformationController {
      Renders a page that displays all personal information from the nhpersonal table
      */
     @GetMapping("/all-newhires")
-    public String getAllNewHires(Model model) {
-        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
-        nhPersonalInformationService.getAllNHPersonal();
-        return "all_newhires_general";
+    public String getAllNewHires( HttpSession session, Model model) {
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
+            nhPersonalInformationService.getAllNHPersonal();
+            return "all_newhires_general";
+        } else {
+            return "redirect:/login";
+        }
     }
 
     /*
@@ -105,16 +116,22 @@ public class NHPersonalInformationController {
       option to choose from which dept is from /allDepts route
     */
     @GetMapping("/newhires-by-dept")
-    public String getAllNHByDeptId(@RequestParam("deptId") Long deptId, Model model){
-        List<NHPersonalInformation> nhPersonalList = null;
-        try {
-            nhPersonalList = nhPersonalInformationService.getNHPersonalByDeptId(deptId);
-            Dept deptName = deptRepository.getReferenceById(deptId);
-            model.addAttribute("newhires", nhPersonalList );
-            model.addAttribute("dept", deptName);
-            return "all_newhires_by_dept";
-        } catch (Exception e) {
-            return "error";
+    public String getAllNHByDeptId(@RequestParam("deptId") Long deptId, HttpSession session, Model model){
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            List<NHPersonalInformation> nhPersonalList = null;
+            try {
+                nhPersonalList = nhPersonalInformationService.getNHPersonalByDeptId(deptId);
+                Dept deptName = deptRepository.getReferenceById(deptId);
+                model.addAttribute("newhires", nhPersonalList);
+                model.addAttribute("dept", deptName);
+                return "all_newhires_by_dept";
+            } catch (Exception e) {
+                return "error";
+            }
+        } else {
+            return "redirect:/login";
         }
     }
 
@@ -123,16 +140,22 @@ public class NHPersonalInformationController {
      option to choose from which manager is from /allManagers route
    */
     @GetMapping("/newhires-by-manager")
-    public String getAllNHByManagerId(@RequestParam("managerId") Long managerId, Model model){
-        List<NHPersonalInformation> nhPersonalList = null;
-        try {
-            nhPersonalList = nhPersonalInformationService.getNHPersonalByManagerId(managerId);
-            Manager managerName = managerRepository.getReferenceById(managerId);
-            model.addAttribute("newhires", nhPersonalList );
-            model.addAttribute("manager", managerName);
-            return "all_newhires_by_manager";
-        } catch (Exception e) {
-            return "error";
+    public String getAllNHByManagerId(@RequestParam("managerId") Long managerId, HttpSession session, Model model){
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            List<NHPersonalInformation> nhPersonalList = null;
+            try {
+                nhPersonalList = nhPersonalInformationService.getNHPersonalByManagerId(managerId);
+                Manager managerName = managerRepository.getReferenceById(managerId);
+                model.addAttribute("newhires", nhPersonalList);
+                model.addAttribute("manager", managerName);
+                return "all_newhires_by_manager";
+            } catch (Exception e) {
+                return "error";
+            }
+        }else {
+            return "redirect:/login";
         }
     }
 
@@ -140,30 +163,32 @@ public class NHPersonalInformationController {
      displays all job titles and displays an option to select all newhires under a specific job title
       */
     @GetMapping("/allTitles")
-    public String renderAllTitles(){
-        return "all_titles";
-    }
-
-    @GetMapping("/newhires-by-title")
-    public String getNHByJob(@RequestParam("jobtitle")String jobTitle, Model model){
-        List<NHPersonalInformation> nhPersonalList = null;
-        try {
-            nhPersonalList = nhPersonalInformationService.getNHByJobTitle(jobTitle);
-            model.addAttribute("newhires", nhPersonalList);
-            return "all_newhires_by_title";
-        } catch (Exception e) {
-            return "error";
+    public String renderAllTitles(HttpSession session, Model model){
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            return "all_titles";
+        }else {
+            return "redirect:/login";
         }
     }
 
-    /*
-    renders all newhires from nhpersonal table and displays an option to delete a newhire based on their id
-     */
-    @GetMapping("/delete-newhire")
-    public String renderDeleteNH(Model model) {
-        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
-        nhPersonalInformationService.getAllNHPersonal();
-        return "delete_newhire";
+    @GetMapping("/newhires-by-title")
+    public String getNHByJob(@RequestParam("jobtitle")String jobTitle, HttpSession session, Model model){
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            List<NHPersonalInformation> nhPersonalList = null;
+            try {
+                nhPersonalList = nhPersonalInformationService.getNHByJobTitle(jobTitle);
+                model.addAttribute("newhires", nhPersonalList);
+                return "all_newhires_by_title";
+            } catch (Exception e) {
+                return "error";
+            }
+        }else {
+            return "redirect:/login";
+        }
     }
 
     /*
@@ -171,10 +196,16 @@ public class NHPersonalInformationController {
      displays an option to update a newhire's phone number based on their id
      */
     @GetMapping("/update-phone")
-    public String renderUpdatePhone(Model model){
-        model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
-        nhPersonalInformationService.getAllNHPersonal();
-        return "update_phone";
+    public String renderUpdatePhone(HttpSession session, Model model){
+        // ensure user is logged in
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            model.addAttribute("allNewhires", nhPersonalInformationService.getAllNHPersonal());
+            nhPersonalInformationService.getAllNHPersonal();
+            return "update_phone";
+        }else {
+            return "redirect:/login";
+        }
     }
 
     // POST ROUTES
@@ -186,13 +217,7 @@ public class NHPersonalInformationController {
         return"success";
     }
 
-    // submits request to delete newhire from nhpersonal table
-    @DeleteMapping("/delete-newhire")
-    public String deleteNH(@RequestParam("nhId") Long nhId){
-        nhPersonalInformationService.deleteNH(nhId);
-        return "success";
-    }
-
+    // submits request to update newhire phone number
     @PostMapping("/update-phone")
     public String updatePhone(@RequestParam("nhId") Long nhId, @RequestParam("phoneNumber") String phoneNumber, Model model) {
         try {

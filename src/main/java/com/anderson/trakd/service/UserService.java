@@ -18,6 +18,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    // create a new user
     @Transactional
     public void createUser(User user) throws Exception{
         User userExists = userRepository.findByEmail((user.getEmail()));

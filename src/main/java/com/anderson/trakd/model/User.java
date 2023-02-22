@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+// POJO for user
 @Entity
 @Table(name = "user")
 public class User implements Serializable {

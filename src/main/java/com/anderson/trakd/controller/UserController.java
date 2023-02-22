@@ -65,6 +65,8 @@ public class UserController {
 
 
     // SIGNUP ROUTES
+
+    // assign new user model to signup page and render signup page
     @GetMapping("/signup")
     public String renderSignup(Model model) {
         model.addAttribute("user", new User());
@@ -88,17 +90,19 @@ public class UserController {
             user.setPassword(encodedPassword);
             // save user information
             userService.createUser(user);
+            // new session is attributed to account and allows them to be directed to dashboard
             session.setAttribute("user", user.getEmail());
             return "redirect:/userhome";
 
+            // error handling will reload signup page
         } catch (Exception e) {
             String error = "Invalid input was entered!";
             model.addAttribute("error", error);
             return "signup";
         }
-
     }
 
+    // Display homepage
     @GetMapping("/")
     public String renderHomepage(HttpSession session, Model model) {
         String email = (String) session.getAttribute("user");
@@ -110,6 +114,8 @@ public class UserController {
 
 
     // USERHOME ROUTES
+
+    // if the user has a session meaning they are logged in the user dashboard will render
     @GetMapping("/userhome")
     public String renderUserHome(HttpSession session, Model model) {
         String email = (String) session.getAttribute("user");
@@ -122,7 +128,6 @@ public class UserController {
     }
 
     // DELETE USER ACCOUNT
-
     @GetMapping("/delete")
     public String renderDeleteForm(HttpSession session, Model model) {
         String email = (String) session.getAttribute("user");
@@ -134,13 +139,14 @@ public class UserController {
         }
     }
 
-
-
-
     @PostMapping("/delete")
     public String deleteAccount(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
-        User sessionUser = userRepository.findByEmail(email);
+        User sessionUser = userRepository.findByEmail(email); // find current user email
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        /* if there is a session established and the entered email and password match the db
+        the user will be deleted and the homepage will load
+        */
         if (sessionUser != null && encoder.matches(password, sessionUser.getPassword()) && email.equals(sessionUser.getEmail())) {
             userRepository.delete(sessionUser); // delete user account
             session.invalidate();
@@ -150,5 +156,4 @@ public class UserController {
             return "delete";
         }
     }
-
 }
