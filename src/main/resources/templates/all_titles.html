@@ -18,12 +18,12 @@
         <div class="col-2">
             <div class="card data-card">
                 <div class="card-header">
-                    Enter Department ID
+                    View All New Hires Under Specific Title:
                 </div>
                 <div class="card-body">
                     <form method="get" th:action="@{/newhires-by-title}">
                         <div class="form-group">
-                            <label for="user-input">View All New Hires Under Specific Title:</label>
+                            <label for="user-input">Enter Title to Search</label>
                             <input type="text" class="form-control" id="user-input" name="jobtitle">
                         </div>
                         <button type="submit" class="searchBtn">Submit</button>
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-10 card-signin">
-            <div class="card-header">
+            <div class="card-header title">
                 New Hire Titles
             </div>
             <div class="card-body">

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.security.SecureRandom;
 
@@ -156,4 +155,37 @@ public class UserController {
             return "delete";
         }
     }
+
+
+
+
+    // UPDATE USER ACCOUNT
+
+    @GetMapping("/update-account")
+    public String renderUpdatePassword(HttpSession session, Model model){
+        String email = (String) session.getAttribute("user");
+        if (email != null) {
+            model.addAttribute("userEmail", email);
+            return "update-account";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @PostMapping("/update-account")
+    public String updatePassword(@RequestParam String email, @RequestParam String oldPassword, @RequestParam String newPassword, Model model) {
+        User sessionUser = userRepository.findByEmail(email);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (sessionUser != null && encoder.matches(oldPassword, sessionUser.getPassword()) && email.equals(sessionUser.getEmail())) {
+            String encodedNewPassword = encoder.encode(newPassword);
+            sessionUser.setPassword(encodedNewPassword);
+            userRepository.save(sessionUser);
+            return "success";
+        }else {
+            model.addAttribute("errorMessage", "Invalid email or password");
+            return "update-account";
+        }
+    }
+
 }
+

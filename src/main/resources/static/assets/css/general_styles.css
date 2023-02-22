@@ -71,12 +71,13 @@ body{
 
 /* login form signup form and credentials form */
 .card-signin{
-
     color: #787775;
     border: solid 1.5px #ebebeb;
     background-color: #ebebeb;
     font-family:'AmstelvarAlpha';
 }
+
+
 
 /* select menu in create newhire page */
 
@@ -192,6 +193,11 @@ body{
     background-color: #ebebeb;
     font-family:'AmstelvarAlpha';
     border-radius: 5px;
+}
+/* header of tables that show all data for each request by user*/
+.title{
+    text-align: center;
+    font-size: 20px;
 
 }
 
